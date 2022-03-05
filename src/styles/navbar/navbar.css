@@ -1,0 +1,23 @@
+.navbar-up{
+    align-items: center;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    width: 70rem;
+}
+
+.navbar-main{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.btn-logout{
+    font-size: 17px;
+    color: white;
+}
+.btn-logout:hover{
+    color: #0d6efd;
+    outline: none;
+}

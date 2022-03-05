@@ -1,0 +1,17 @@
+.home {
+display: flex;
+}
+
+
+.upload{
+    display: block;
+    width: 50%;
+    height: 20vh;
+    padding-top: 2.5rem;
+    margin-top: 8rem;
+    box-shadow: 2px 2px 5px #999;
+}
+
+.navbar-home{
+   width: 80%;
+}
