@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyecto.entity.Cita;
 import com.proyecto.entity.Comentario;
 import com.proyecto.entity.Servicio;
 import com.proyecto.entity.TipoServicio;
@@ -486,6 +487,94 @@ public class Controller {
 				.collect(Collectors.toList());
 
 		return comentario;
+	}
+	
+	// -----------------------------//
+	// Cita---------------------------------------------------
+	/**
+	 * Sirve para registrar/crear una Cita
+	 * 
+	 * @param comentario
+	 * @return
+	 */
+	@PostMapping("/registroCita")
+	public ResponseEntity<?> registroCita(@RequestBody Cita cita) {
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
+	}
+
+	/**
+	 * Sirve para eliminar un Cita
+	 * 
+	 * @param citaId
+	 * @return
+	 */
+	@DeleteMapping("/borrarCita/{id}")
+	public ResponseEntity<?> borrarCita(@PathVariable(value = "id") int citaId) {
+
+		if (!services.findByIdCita(citaId).isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		services.deleteByIdCita(citaId);
+		return ResponseEntity.ok().build();
+	}
+
+	/**
+	 * Sirve para actualizar un Cita
+	 * 
+	 * @param detallesCita
+	 * @param citaId
+	 * @return
+	 */
+	@PutMapping("/actualizarCita/{id}")
+	public ResponseEntity<?> actualizarCita(@RequestBody Cita detallesCita,
+			@PathVariable(value = "id") int citaId) {
+
+		Optional<Cita> cita = services.findByIdCita(citaId);
+
+		if (!services.findByIdCita(citaId).isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		cita.get().setCitaId(detallesCita.getCitaId());
+		cita.get().setFechaCita(detallesCita.getFechaCita());
+		cita.get().setDireccionCita(detallesCita.getDireccionCita());
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita.get()));
+
+	}
+
+	/**
+	 * Sirve para Leer un cita
+	 * 
+	 * @param citaId
+	 * @return
+	 */
+	@GetMapping("/leerCita/{id}")
+	public ResponseEntity<?> leerCita(@PathVariable(value = "id") int citaId) {
+
+		Optional<Cita> cita = services.findByIdCita(citaId);
+		if (!cita.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(cita);
+
+	}
+
+	/**
+	 * Listar todos las Cita
+	 * 
+	 * @return
+	 */
+	@GetMapping("/listarCita")
+	public List<Cita> listarCita() {
+
+		List<Cita> cita = StreamSupport.stream(services.findAllCita().spliterator(), false)
+				.collect(Collectors.toList());
+
+		return cita;
 	}
 
 }
