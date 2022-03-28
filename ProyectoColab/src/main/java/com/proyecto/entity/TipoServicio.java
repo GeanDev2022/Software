@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,7 +18,8 @@ public class TipoServicio implements Serializable{
 
 	private static final long serialVersionUID = -8109810167141483451L;
 	
-	@Column(name = "tipoServicioId", nullable = false, unique = true)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tipoServicioId;
 	
 	@Column(name = "nombreTipoServicio", length = 300, nullable = false)

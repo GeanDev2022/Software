@@ -36,9 +36,6 @@ public class Persona implements Serializable {
 	@Column(name = "direccionPersona", length = 300, nullable = false)
 	private String direccionPersona;
 
-	@Column(name = "correoPersona", length = 300, nullable = false)
-	private String correoPersona;
-
 	@Column(name = "celularPersona", nullable = false)
 	private int celularPersona;
 
@@ -80,14 +77,6 @@ public class Persona implements Serializable {
 
 	public void setDireccionPersona(String direccionPersona) {
 		this.direccionPersona = direccionPersona;
-	}
-
-	public String getCorreoPersona() {
-		return correoPersona;
-	}
-
-	public void setCorreoPersona(String correoPersona) {
-		this.correoPersona = correoPersona;
 	}
 
 	public int getCelularPersona() {

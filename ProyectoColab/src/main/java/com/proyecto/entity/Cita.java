@@ -2,6 +2,7 @@ package com.proyecto.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,5 +38,65 @@ public class Cita implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "servicioId")
 	private Servicio servicio;
+
+	public int getCitaId() {
+		return citaId;
+	}
+
+	public void setCitaId(int citaId) {
+		this.citaId = citaId;
+	}
+
+	public Date getFechaCita() {
+		return fechaCita;
+	}
+
+	public void setFechaCita(Date fechaCita) {
+		this.fechaCita = fechaCita;
+	}
+
+	public String getDireccionCita() {
+		return direccionCita;
+	}
+
+	public void setDireccionCita(String direccionCita) {
+		this.direccionCita = direccionCita;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Servicio getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(citaId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cita other = (Cita) obj;
+		return citaId == other.citaId;
+	}
+	
+	
+	
 
 }
