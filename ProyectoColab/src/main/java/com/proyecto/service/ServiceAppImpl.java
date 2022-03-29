@@ -78,7 +78,7 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdUsuario(int id) {
 		usuarioRepository.deleteById(id);
 	}
-
+/**
 	@Override
 	public List<Object> autenticateUsuario(String email, String password) {
 
@@ -108,7 +108,7 @@ public class ServiceAppImpl implements ServiceApp {
 		}
 		return lista;
 	}
-	
+	**/
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
 	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario) {
