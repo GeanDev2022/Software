@@ -1,10 +1,10 @@
 package com.proyecto.service;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,12 +41,12 @@ public class ServiceAppImpl implements ServiceApp {
 	@Autowired
 	private CitaRepository citaRepository;
 
-	private final EntityManager entityManager;
+	/**private final EntityManager entityManager;
 
 	@Autowired
 	public ServiceAppImpl(final EntityManager entityManager) {
 		this.entityManager = entityManager;
-	}
+	}**/
 
 	// ---------------------------------------USER------------------------------------
 	@Override
