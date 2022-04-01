@@ -26,7 +26,7 @@ public class TipoServicio implements Serializable{
 	private String nombreTipoServicio;
 	
 	@ManyToOne
-	@JoinColumn(name = "servicioId")
+	@JoinColumn(name = "ServicioId")
 	private Servicio servicio;
 
 	public int getTipoServicioId() {

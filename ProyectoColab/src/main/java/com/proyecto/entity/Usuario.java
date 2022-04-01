@@ -22,15 +22,15 @@ public class Usuario extends Persona implements Serializable {
 	@Column(name = "contrasenaUsuario", length = 300, nullable = false)
 	private String contrasenaUsuario;
 
-	@OneToMany(mappedBy = "tipoUsuario")
+	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private List<TipoUsuario> tipoUsuario;
 
-	@OneToMany(mappedBy = "comentario")
+	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private List<Comentario> comentario;
 
-	@OneToMany(mappedBy = "comentario")
+	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private List<Cita> cita;
 

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Cita")
 public class Cita implements Serializable {
@@ -32,11 +34,11 @@ public class Cita implements Serializable {
 	private String direccionCita;
 
 	@ManyToOne
-	@JoinColumn(name = "usuarioId")
+	@JoinColumn(name = "personaId")
 	private Usuario usuario;
 
-	@OneToOne
-	@JoinColumn(name = "servicioId")
+	@OneToOne(mappedBy = "cita")
+	@JsonIgnore
 	private Servicio servicio;
 
 	public int getCitaId() {
@@ -95,8 +97,7 @@ public class Cita implements Serializable {
 		Cita other = (Cita) obj;
 		return citaId == other.citaId;
 	}
-	
-	
+
 	
 
 }

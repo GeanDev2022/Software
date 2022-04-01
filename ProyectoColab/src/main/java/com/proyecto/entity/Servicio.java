@@ -2,6 +2,7 @@ package com.proyecto.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,12 +33,11 @@ public class Servicio implements Serializable {
 	@Column(name = "precio", nullable = false)
 	private int precio;
 
-	@ManyToOne
-	@JoinColumn(name = "usuarioId")
-	private TipoServicio tipoServicio;
-
-	@OneToOne(mappedBy = "servicio")
+	@OneToMany(mappedBy = "servicio")
 	@JsonIgnore
+	private List<TipoServicio> tipoServicio;
+
+	@OneToOne
 	private Cita cita;
 
 	public int getServicioId() {
@@ -63,11 +64,11 @@ public class Servicio implements Serializable {
 		this.precio = precio;
 	}
 
-	public TipoServicio getTipoServicio() {
+	public List<TipoServicio> getTipoServicio() {
 		return tipoServicio;
 	}
 
-	public void setTipoServicio(TipoServicio tipoServicio) {
+	public void setTipoServicio(List<TipoServicio> tipoServicio) {
 		this.tipoServicio = tipoServicio;
 	}
 
@@ -95,5 +96,7 @@ public class Servicio implements Serializable {
 		Servicio other = (Servicio) obj;
 		return ServicioId == other.ServicioId;
 	}
+
+	
 
 }
