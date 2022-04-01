@@ -1,10 +1,10 @@
 package com.proyecto.service;
 
-//import java.util.ArrayList;
-//import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-//import javax.persistence.*;
+import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,12 +41,12 @@ public class ServiceAppImpl implements ServiceApp {
 	@Autowired
 	private CitaRepository citaRepository;
 
-	/**private final EntityManager entityManager;
+	private final EntityManager entityManager;
 
 	@Autowired
 	public ServiceAppImpl(final EntityManager entityManager) {
 		this.entityManager = entityManager;
-	}**/
+	}
 
 	// ---------------------------------------USER------------------------------------
 	@Override
@@ -78,16 +78,16 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdUsuario(int id) {
 		usuarioRepository.deleteById(id);
 	}
-/**
+
 	@Override
-	public List<Object> autenticateUsuario(String email, String password) {
+	public List<Object> autenticarUsuario(String email, String password) {
 
 		int numero = 0;
 		List<Object> lista = new ArrayList<Object>();
 		try {
 
 			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("BASEDEDATOS.autenticateUser");
+					.createStoredProcedureQuery("bd_safelife.autenticarUsuario");
 
 			// Registrar los parámetros de entrada y salida
 			storedProcedureQuery.registerStoredProcedureParameter("parametro1", String.class, ParameterMode.IN);
@@ -108,7 +108,7 @@ public class ServiceAppImpl implements ServiceApp {
 		}
 		return lista;
 	}
-	**/
+	
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
 	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario) {

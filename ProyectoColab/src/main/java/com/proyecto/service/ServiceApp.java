@@ -1,6 +1,6 @@
 package com.proyecto.service;
 
-//import java.util.List;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -22,7 +22,7 @@ public interface ServiceApp {
 	public Page<Usuario> findAllUsuario(Pageable pageable);
 	public Optional<Usuario> findByIdUsuario(int id);
 	public void deleteByIdUsuario(int id);
-	//public List<Object>  autenticateUsuario(String email, String password);
+	public List<Object>  autenticarUsuario(String email, String password);
 	
 	// TipoUsuario
 	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario);
