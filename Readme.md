@@ -19,11 +19,11 @@
  
 Una vez abierto eclipse, nos dirigimos a la pestaña superior llamada Help -> Eclipse Marketplace
 
-<img src="./img/Screenshot_11.png"/>
+<img src="./Img/Screenshot_11.png"/>
 
 Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spring Tools 4 3.9.21.RELEASE"
 
-<img src="./img/Screenshot_12.png"/>
+<img src="./Img/Screenshot_12.png"/>
 
 <!-- ------------------------------------------  -->
 <h2 align="center"> 4. Configurar BD (PostgreSQL)</h2>
@@ -33,19 +33,19 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
 <ol>
     <!-- 1 -->
     <li><p>Buscar la carpeta Postgree en el inicio (tecla windows) y abrir pgAdmin 4: </p>
-    <img src="./img/Screenshot_1.png"/>
+    <img src="./Img/Screenshot_1.png"/>
     </li></br>
     <!-- 2 -->
     <li><p>Al ingresar se pedira la contraseña ingresada en la etapa de instalacion: </p>
-    <img src="./img/Screenshot_2.png"/>
+    <img src="./Img/Screenshot_2.png"/>
     </li></br>
     <!-- 3 -->
     <li><p>Luego abre servers, posterior register y finalmente server: </p>
-    <img src="./img/Screenshot_3.png"/>
+    <img src="./V/Screenshot_3.png"/>
     </li></br>
     <!-- 4 -->
     <li><p>Se coloca nombre a la BD: BD_SafeLife(nombre opcional): </p>
-    <img src="./img/Screenshot_4.png"/>
+    <img src="./Img/Screenshot_4.png"/>
     </li></br>
     <!-- 5 -->
     <li><p>Vamos a configurar nuestra BD: </p>
@@ -54,15 +54,15 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
     <strong>Database: </strong>d3uef5qnrfdnk2</br>
     <strong>User: </strong>gsiyywzbkfonjy</br>
     <strong>Password: </strong>7df55e61c0ebcc9a79d0e7af8d3f26b18d5bdf53c474451a9a52c585fc49e3fe</br>   
-    <img src="./img/Screenshot_5.png"/>
+    <img src="./Img/Screenshot_5.png"/>
     </li></br>
     <!-- 6 -->
     <li><p>Luego nos dirigimos en la pestaña Advanced y en DB restriction agregamos el Database, finalizamos en Save: </p>
-    <img src="./img/Screenshot_6.png"/>
+    <img src="./Img/Screenshot_6.png"/>
     </li></br>
     <!-- 6 -->
     <li><p>Verificamos que se hayan creado las tablas: </p>
-    <img src="./img/Screenshot_7.png"/>
+    <img src="./Img/Screenshot_7.png"/>
     </li></br>
 <!-- ------------------------------------------  -->
 <h2 align="center"> 5. Preparando el despliegue</h2>
