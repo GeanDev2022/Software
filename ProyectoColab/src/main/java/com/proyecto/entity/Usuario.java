@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,9 +24,9 @@ public class Usuario extends Persona implements Serializable {
 	@Column(name = "contrasenaUsuario", length = 300, nullable = false)
 	private String contrasenaUsuario;
 
-	@OneToMany(mappedBy = "usuario")
-	@JsonIgnore
-	private List<TipoUsuario> tipoUsuario;
+	@ManyToOne
+	@JoinColumn(name = "tipoUsuarioId")
+	private TipoUsuario tipoUsuario;
 
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
@@ -50,11 +52,11 @@ public class Usuario extends Persona implements Serializable {
 		this.contrasenaUsuario = contrasenaUsuario;
 	}
 
-	public List<TipoUsuario> getTipoUsuario() {
+	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(List<TipoUsuario> tipoUsuario) {
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 

@@ -4,10 +4,9 @@
 
 <p>El proceso se realiza en un sistema operativo `Windows 10` acompañado de cada app necesario para le buen funcionamiento: </p>
 <ul>
-    <li><a href="https://www.eclipse.org/downloads/">Eclipse</a></li>
-    <li><a href="https://www.postgresql.org/download/">PostgreSQL</a></li>
-    <li><a href="https://www.java.com/es/download/ie_manual.jsp">Java</a></li>
-    <li><a href="https://git-scm.com/downloads">Git</a></li>
+    <li><a href="https://www.eclipse.org/downloads/">Eclipse</a> (IDE for java developers 2021-09)</li>
+    <li><a href="https://www.postgresql.org/download/">PostgreSQL</a> (Version 14)</li>
+    <li><a href="https://www.java.com/es/download/ie_manual.jsp">Java</a> (Version 8 Update 321)</li>
 </ul>
 <!-- ------------------------------------------  -->
 <h2 align="center"> 2. Instalacion de programas necesarios</h2>
@@ -19,11 +18,11 @@
  
 Una vez abierto eclipse, nos dirigimos a la pestaña superior llamada Help -> Eclipse Marketplace
 
-<img src="./Img/Screenshot_11.png"/>
+<img src="./Img/Screenshot_10.png"/>
 
 Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spring Tools 4 3.9.21.RELEASE"
 
-<img src="./Img/Screenshot_12.png"/>
+<img src="./Img/Screenshot_11.png"/>
 
 <!-- ------------------------------------------  -->
 <h2 align="center"> 4. Configurar BD (PostgreSQL)</h2>
@@ -77,15 +76,19 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
 <p>Luego descomprime este .ZIP en una carpeta de su interes, le queda una carpeta llamada "Software-Backend", dentro de ella se encuentra el codigo del Backend (ProyectoColab)</p>
 <img src="./Img/Screenshot_9.png"/>
 
-<p>Posterior a eso, debemos dirigirnos a la rama "deploy" donde se encuentra las configuraciones del despliegue del proyecto, ademas del .JAR generado</p>
-<img src="./Img/Screenshot_.png"/>
+<p>Luego, vamos a importar la carpeta ProyectoColab a eclipse</p>
 
-<p>Vamos a la carpeta target, y dentro de ella sin seleccionar ningun archivo damos click derecho y abrimos un "Git Bash here" e ingresamos: </p>
+<img src="./Img/Screenshot_12.png"/>
+<img src="./Img/Screenshot_13.png"/>
+<img src="./Img/Screenshot_14.png"/>
 
-`java -jar ProyectoColab-0.0.1-SNAPSHOT.jar`
+<p>Para finalizar le damos click derecho encima de la carpeta principal del proyecto, luego en Run as y ejecutamos con Spring Boot App</p>
 
-<img src="./Img/Screenshot_10.png"/>
-<p>Despues de desplegado el proyecto en Tomcat, podemos acceder a los recursos de este mediante http://localhost:8080</p>
+<img src="./Img/Screenshot_15.png"/>
+
+Y vemos como se ejecuto correctamente
+
+<img src="./Img/Screenshot_16.png"/>
 
 
 
