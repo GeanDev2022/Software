@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# GUIA DE INSTALACION DEL FRONTEND
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+instalaremos el gestor de paquetes npm y plugins para trabajar con react - redux
+<ol>
+    <li><a href="https://github.com/GeanDev2022/Software/tree/Backend">Google Chrome</a></li>
+    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">React Developer Tools</a></li>
+    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">Redux Devtools</a></li>
+    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">Visual Studio Code</a></li>
+    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">Node</a></li>
+</ol>
 
-## Available Scripts
+# Node 
 
-In the project directory, you can run:
+instalaremos la version 16.14.2 LTS Recomendado para la mayoria
 
-### `npm start`
+# React
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+una vez descargado el proyecto, en visual studio code, en la terminal instalaremos las siguientes librerias:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+<b>npm i react-router-dom</b>                     ----             manejo de rutas  <br/>
+<b>npm install react-redux redux  </b>            ----              libreria de redux para trabajar con estados<br/>
+<b>npm i redux-thunk </b>                         ----              middleware para trabajar  con acciones asincronicas <br/>
+<b>npm install sweetalert2 </b>                   ----              para visualizar los mensajes de las acciones<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Boostrap
 
-### `npm run build`
+ ``` <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+copiamos estas dos lineas y vamos a public --> index.html y pegamos estas dos lineas para poder trabajar con Boostrap 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://user-images.githubusercontent.com/73712509/162595142-04404dbc-96e6-477e-b1bb-4b0b70965354.png)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        
+ 
