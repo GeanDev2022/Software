@@ -33,11 +33,12 @@ public class Servicio implements Serializable {
 	@Column(name = "precio", nullable = false)
 	private int precio;
 
-	@OneToMany(mappedBy = "servicio")
-	@JsonIgnore
-	private List<TipoServicio> tipoServicio;
+	@Column(name = "tipoServicio")
+	private int tipoServicio;
 
-	@OneToOne
+	
+	@OneToOne(mappedBy = "servicio")
+	@JsonIgnore
 	private Cita cita;
 
 	public int getServicioId() {
@@ -64,11 +65,11 @@ public class Servicio implements Serializable {
 		this.precio = precio;
 	}
 
-	public List<TipoServicio> getTipoServicio() {
+	public int getTipoServicio() {
 		return tipoServicio;
 	}
 
-	public void setTipoServicio(List<TipoServicio> tipoServicio) {
+	public void setTipoServicio(int tipoServicio) {
 		this.tipoServicio = tipoServicio;
 	}
 
