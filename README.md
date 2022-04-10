@@ -2,11 +2,11 @@
 
 instalaremos el gestor de paquetes npm y plugins para trabajar con react - redux
 <ol>
-    <li><a href="https://github.com/GeanDev2022/Software/tree/Backend">Google Chrome</a></li>
-    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">React Developer Tools</a></li>
-    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">Redux Devtools</a></li>
-    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">Visual Studio Code</a></li>
-    <li><a href="https://github.com/GeanDev2022/Software/tree/Frontend">Node</a></li>
+    <li><a href="https://www.google.com/chrome/">Google Chrome</a></li>
+    <li><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=es&authuser=1">React Developer Tools</a></li>
+    <li><a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=es">Redux Devtools</a></li>
+    <li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+    <li><a href="https://nodejs.org/es/">Node</a></li>
 </ol>
 
 # Node 
