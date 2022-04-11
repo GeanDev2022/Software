@@ -54,13 +54,13 @@ public class Controller {
 		}
 		return validar;
 	}
-/**
+
 	@PostMapping("/autenticarUsuario")
 	public List<Object> autenticarUsuario(@RequestBody Usuario usuario) {
 
-		return services.autenticateUsuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
+		return services.autenticarUsuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
 	}
-**/
+
 	/**
 	 * Sirve para eliminar un usuario
 	 * 
