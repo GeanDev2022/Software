@@ -37,8 +37,7 @@ public class Cita implements Serializable {
 	@JoinColumn(name = "personaId")
 	private Usuario usuario;
 
-	@OneToOne(mappedBy = "cita")
-	@JsonIgnore
+	@OneToOne
 	private Servicio servicio;
 
 	public int getCitaId() {

@@ -28,7 +28,7 @@ import com.proyecto.service.ServiceApp;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class Controller {
 
 	// -----------------------------//
@@ -54,13 +54,13 @@ public class Controller {
 		}
 		return validar;
 	}
-/**
+
 	@PostMapping("/autenticarUsuario")
 	public List<Object> autenticarUsuario(@RequestBody Usuario usuario) {
 
-		return services.autenticateUsuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
+		return services.autenticarUsuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
 	}
-**/
+
 	/**
 	 * Sirve para eliminar un usuario
 	 * 
@@ -324,7 +324,8 @@ public class Controller {
 	 */
 	@PostMapping("/registroServicio")
 	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
-
+		int idaleatorio = (int) (1000+Math.random()*7000000);
+		servicio.setServicioId(idaleatorio);
 		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
 	}
 

@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TipoServicio")
@@ -25,9 +28,7 @@ public class TipoServicio implements Serializable{
 	@Column(name = "nombreTipoServicio", length = 300, nullable = false)
 	private String nombreTipoServicio;
 	
-	@ManyToOne
-	@JoinColumn(name = "ServicioId")
-	private Servicio servicio;
+
 
 	public int getTipoServicioId() {
 		return tipoServicioId;
@@ -45,13 +46,7 @@ public class TipoServicio implements Serializable{
 		this.nombreTipoServicio = nombreTipoServicio;
 	}
 
-	public Servicio getServicio() {
-		return servicio;
-	}
 
-	public void setServicio(Servicio servicio) {
-		this.servicio = servicio;
-	}
 
 	@Override
 	public int hashCode() {
