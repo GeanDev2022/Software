@@ -22,7 +22,7 @@ public interface ServiceApp {
 	public Page<Usuario> findAllUsuario(Pageable pageable);
 	public Optional<Usuario> findByIdUsuario(int id);
 	public void deleteByIdUsuario(int id);
-	public List<Object>  autenticarUsuario(String email, String password);
+	public String Autenticarusuario(String email, String contrasena);
 	
 	// TipoUsuario
 	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario);
@@ -39,7 +39,7 @@ public interface ServiceApp {
 	public void deleteByIdTipoServicio(int id);
 	
 	// Servicio
-	public boolean saveServicio(Servicio servicio);
+	public String saveServicio(Servicio servicio);
 	public Iterable<Servicio> findAllServicio();
 	public Page<Servicio> findAllServicio(Pageable pageable);
 	public Optional<Servicio> findByIdServicio(int id);
