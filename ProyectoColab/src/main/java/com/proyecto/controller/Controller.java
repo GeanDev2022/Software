@@ -25,7 +25,6 @@ import com.proyecto.entity.Servicio;
 import com.proyecto.entity.TipoServicio;
 import com.proyecto.entity.TipoUsuario;
 import com.proyecto.entity.Usuario;
-import com.proyecto.helper.autenticacion;
 import com.proyecto.service.ServiceApp;
 
 @RestController
@@ -58,9 +57,9 @@ public class Controller {
 	}
 
 	@PostMapping("/autenticarUsuario")
-	public String autenticarUsuario(@RequestBody autenticacion autenticar) {
+	public String autenticarUsuario(@RequestBody Usuario usuario) {
 
-		return services.Autenticarusuario(autenticar.getEmailUsuario(), autenticar.getContrasenaUsuario());
+		return services.Autenticarusuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
 	}
 
 	/**
