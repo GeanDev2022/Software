@@ -22,7 +22,7 @@ public interface ServiceApp {
 	public Page<Usuario> findAllUsuario(Pageable pageable);
 	public Optional<Usuario> findByIdUsuario(int id);
 	public void deleteByIdUsuario(int id);
-	public List<Object>  autenticarUsuario(String email, String password);
+	public String Autenticarusuario(String email, String contrasena);
 	
 	// TipoUsuario
 	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario);

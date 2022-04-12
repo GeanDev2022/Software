@@ -72,13 +72,19 @@ public class ServiceAppImpl implements ServiceApp {
 	public Optional<Usuario> findByIdUsuario(int id) {
 		return usuarioRepository.findById(id);
 	}
-
+	
 	@Override
 	@Transactional
 	public void deleteByIdUsuario(int id) {
 		usuarioRepository.deleteById(id);
 	}
 
+	public String Autenticarusuario(String email, String contrasena){
+		return usuarioRepository.Procedureautenticarusuario(email, contrasena);
+		
+		
+	}
+/**
 	@Override
 	public List<Object> autenticarUsuario(String email, String password) {
 
@@ -108,6 +114,7 @@ public class ServiceAppImpl implements ServiceApp {
 		}
 		return lista;
 	}
+**/	
 	
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
@@ -168,6 +175,7 @@ public class ServiceAppImpl implements ServiceApp {
 	}
 	
 	// ---------------------------------------Servicio------------------------------------
+
 	@Override
 	@Transactional
 	public boolean saveServicio(Servicio servicio) {
@@ -198,6 +206,7 @@ public class ServiceAppImpl implements ServiceApp {
 		}
 		return validar;
 	}
+	
 
 	@Override
 	@Transactional(readOnly = true)

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.entity.Cita;
@@ -24,6 +25,7 @@ import com.proyecto.entity.Servicio;
 import com.proyecto.entity.TipoServicio;
 import com.proyecto.entity.TipoUsuario;
 import com.proyecto.entity.Usuario;
+import com.proyecto.helper.autenticacion;
 import com.proyecto.service.ServiceApp;
 
 @RestController
@@ -56,11 +58,18 @@ public class Controller {
 	}
 
 	@PostMapping("/autenticarUsuario")
-	public List<Object> autenticarUsuario(@RequestBody Usuario usuario) {
+	public String autenticarUsuario(@RequestBody autenticacion autenticar) {
 
-		return services.autenticarUsuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
+		return services.Autenticarusuario(autenticar.getEmailUsuario(), autenticar.getContrasenaUsuario());
 	}
 
+	/**
+	 * @PostMapping("/autenticarUsuario") public List<Object>
+	 * autenticarUsuario(@RequestBody Usuario usuario) {
+	 * 
+	 * return services.autenticarUsuario(usuario.getEmailUsuario(),
+	 * usuario.getContrasenaUsuario()); }
+	 **/
 	/**
 	 * Sirve para eliminar un usuario
 	 * 
@@ -313,21 +322,23 @@ public class Controller {
 
 		return tipoServicio;
 	}
-	
+
 	// -----------------------------//
 	// Servicio---------------------------------------------------
+
 	/**
 	 * Sirve para registrar/crear un Servicio
 	 * 
 	 * @param servicio
 	 * @return
 	 */
-	@PostMapping("/registroServicio")
-	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
-		int idaleatorio = (int) (1000+Math.random()*7000000);
-		servicio.setServicioId(idaleatorio);
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-	}
+	/**
+	 * @PostMapping("/registroServicio") public ResponseEntity<?>
+	 * registroServicio(@RequestBody Servicio servicio) { int idaleatorio = (int)
+	 * (1000+Math.random()*7000000); servicio.setServicioId(idaleatorio); return
+	 * ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
+	 * }
+	 **/
 
 	/**
 	 * Sirve para eliminar un Servicio
@@ -353,22 +364,26 @@ public class Controller {
 	 * @param servicioId
 	 * @return
 	 */
-	@PutMapping("/actualizarServicio/{id}")
-	public ResponseEntity<?> actualizarServicio(@RequestBody Servicio detallesServicio,
-			@PathVariable(value = "id") int servicioId) {
-
-		Optional<Servicio> servicio = services.findByIdServicio(servicioId);
-
-		if (!services.findByIdServicio(servicioId).isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-
-		servicio.get().setServicioId(detallesServicio.getServicioId());
-		servicio.get().setNombreServicio(detallesServicio.getNombreServicio());
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio.get()));
-
-	}
+	/**
+	 * @PutMapping("/actualizarServicio/{id}") public ResponseEntity<?>
+	 * actualizarServicio(@RequestBody Servicio detallesServicio,
+	 * 
+	 * @PathVariable(value = "id") int servicioId) {
+	 * 
+	 *                     Optional<Servicio> servicio =
+	 *                     services.findByIdServicio(servicioId);
+	 * 
+	 *                     if (!services.findByIdServicio(servicioId).isPresent()) {
+	 *                     return ResponseEntity.notFound().build(); }
+	 * 
+	 *                     servicio.get().setServicioId(detallesServicio.getServicioId());
+	 *                     servicio.get().setNombreServicio(detallesServicio.getNombreServicio());
+	 * 
+	 *                     return
+	 *                     ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio.get()));
+	 * 
+	 *                     }
+	 **/
 
 	/**
 	 * Sirve para Leer un Servicio
@@ -401,7 +416,7 @@ public class Controller {
 
 		return servicio;
 	}
-	
+
 	// -----------------------------//
 	// Comentario---------------------------------------------------
 	/**
@@ -489,7 +504,7 @@ public class Controller {
 
 		return comentario;
 	}
-	
+
 	// -----------------------------//
 	// Cita---------------------------------------------------
 	/**
@@ -529,8 +544,7 @@ public class Controller {
 	 * @return
 	 */
 	@PutMapping("/actualizarCita/{id}")
-	public ResponseEntity<?> actualizarCita(@RequestBody Cita detallesCita,
-			@PathVariable(value = "id") int citaId) {
+	public ResponseEntity<?> actualizarCita(@RequestBody Cita detallesCita, @PathVariable(value = "id") int citaId) {
 
 		Optional<Cita> cita = services.findByIdCita(citaId);
 
