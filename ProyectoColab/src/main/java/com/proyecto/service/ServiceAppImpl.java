@@ -1,17 +1,12 @@
 package com.proyecto.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
 import javax.persistence.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.proyecto.entity.Cita;
 import com.proyecto.entity.Comentario;
 import com.proyecto.entity.Servicio;
@@ -49,10 +44,13 @@ public class ServiceAppImpl implements ServiceApp {
 	}
 
 	// ---------------------------------------USER------------------------------------
+
 	@Override
 	@Transactional
-	public Usuario saveUsuario(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+	public String saveUsuario(Usuario usuario) {
+		return usuarioRepository.ProcedureinsertarUsuario(usuario.getCedulaPersona(), usuario.getCelularPersona(),
+				usuario.getDireccionPersona(), usuario.getEdadPersona(), usuario.getNombrePersona(),
+				usuario.getContrasenaUsuario(), usuario.getEmailUsuario(), usuario.getTipoUsuario());
 	}
 
 	@Override
@@ -87,8 +85,8 @@ public class ServiceAppImpl implements ServiceApp {
 	
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
-	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario) {
-		return tipoUsuarioRepository.save(tipoUsuario);
+	public String saveTipoUsuario(TipoUsuario tipoUsuario) {
+		return tipoUsuarioRepository.ProcedureinsertarTipoUsuario(tipoUsuario.getNombreTipoUsuario());
 	}
 
 	@Override
@@ -116,8 +114,8 @@ public class ServiceAppImpl implements ServiceApp {
 	
 	// ---------------------------------------TipoServicio------------------------------------
 	@Override
-	public TipoServicio saveTipoServicio(TipoServicio tipoServicio) {
-		return tipoServicioRepository.save(tipoServicio);
+	public String saveTipoServicio(TipoServicio tipoServicio) {
+		return tipoServicioRepository.ProcedureinsertarTipoServicio(tipoServicio.getNombreTipoServicio());
 	}
 
 	@Override
@@ -178,8 +176,8 @@ public class ServiceAppImpl implements ServiceApp {
 	
 	// ---------------------------------------Comentario------------------------------------
 	@Override
-	public Comentario saveComentario(Comentario comentario) {
-		return comentarioRepository.save(comentario);
+	public String saveComentario(Comentario comentario) {
+		return comentarioRepository.ProcedureinsertarComentario(comentario.getCalificacion(), comentario.getResenaComentario(), comentario.getUsuario());
 	}
 
 	@Override
@@ -207,8 +205,8 @@ public class ServiceAppImpl implements ServiceApp {
 	
 	// ---------------------------------------Cita------------------------------------
 	@Override
-	public Cita saveCita(Cita cita) {
-		return citaRepository.save(cita);
+	public String saveCita(Cita cita) {
+		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getFechaCita(), cita.getServicio(), cita.getUsuario());
 	}
 
 	@Override

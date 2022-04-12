@@ -36,10 +36,9 @@ public class Servicio implements Serializable {
 	@Column(name = "tipoServicio")
 	private int tipoServicio;
 
-	
 	@OneToOne(mappedBy = "servicio")
 	@JsonIgnore
-	private Cita cita;
+	private int cita;
 
 	public int getServicioId() {
 		return ServicioId;
@@ -73,11 +72,11 @@ public class Servicio implements Serializable {
 		this.tipoServicio = tipoServicio;
 	}
 
-	public Cita getCita() {
+	public int getCita() {
 		return cita;
 	}
 
-	public void setCita(Cita cita) {
+	public void setCita(int cita) {
 		this.cita = cita;
 	}
 
@@ -97,7 +96,5 @@ public class Servicio implements Serializable {
 		Servicio other = (Servicio) obj;
 		return ServicioId == other.ServicioId;
 	}
-
-	
 
 }

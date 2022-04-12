@@ -35,10 +35,10 @@ public class Cita implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "personaId")
-	private Usuario usuario;
+	private int usuario;
 
 	@OneToOne
-	private Servicio servicio;
+	private int servicio;
 
 	public int getCitaId() {
 		return citaId;
@@ -64,19 +64,19 @@ public class Cita implements Serializable {
 		this.direccionCita = direccionCita;
 	}
 
-	public Usuario getUsuario() {
+	public int getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(int usuario) {
 		this.usuario = usuario;
 	}
 
-	public Servicio getServicio() {
+	public int getServicio() {
 		return servicio;
 	}
 
-	public void setServicio(Servicio servicio) {
+	public void setServicio(int servicio) {
 		this.servicio = servicio;
 	}
 
@@ -96,7 +96,5 @@ public class Cita implements Serializable {
 		Cita other = (Cita) obj;
 		return citaId == other.citaId;
 	}
-
-	
 
 }

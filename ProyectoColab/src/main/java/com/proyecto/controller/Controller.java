@@ -44,18 +44,32 @@ public class Controller {
 	 * @return
 	 */
 	@PostMapping("/registroUsuario")
-	public boolean registroUsuario(@RequestBody Usuario usuario) {
-		boolean validar = false;
+	public ResponseEntity<?> registroUsuario(@RequestBody Usuario usuario) {
+	
 		if (usuario.getCedulaPersona() != 0 && !services.findByIdUsuario(usuario.getCedulaPersona()).isPresent()) {
 			if (services.saveUsuario(usuario) != null) {
-				validar = true;
-				return validar;
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveUsuario(usuario));
 			}
 
 		}
-		return validar;
-	}
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
 
+	}
+	
+	/**
+	 * 	@PostMapping("/registroServicio")
+	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
+	}
+	 */
+
+	
+	
+	/**
+	 * 
+	 * @param usuario
+	 * @return
+	 */
 	@PostMapping("/autenticarUsuario")
 	public String autenticarUsuario(@RequestBody Usuario usuario) {
 
@@ -135,8 +149,7 @@ public class Controller {
 		return usuarios;
 	}
 
-	// -----------------------------//
-	// TipoUsuario---------------------------------------------------
+	// -----------------------------TipoUsuario---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear un tipo de usuario
 	 * 
@@ -144,11 +157,17 @@ public class Controller {
 	 * @return
 	 */
 	@PostMapping("/registroTipoUsuario")
-	public ResponseEntity<?> registroTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
+	public ResponseEntity<?> registroTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {		
+		if (tipoUsuario.getTipoUsuarioId() != 0 && !services.findByIdTipoUsuario(tipoUsuario.getTipoUsuarioId()).isPresent()) {
+			if (services.saveTipoUsuario(tipoUsuario) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoUsuario(tipoUsuario));
+			}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoUsuario(tipoUsuario));
+		}
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+
 	}
-
+	
 	/**
 	 * Sirve para eliminar un tipo de usuario
 	 * 
@@ -222,8 +241,7 @@ public class Controller {
 		return tipoUsuario;
 	}
 
-	// -----------------------------//
-	// TipoServicio---------------------------------------------------
+	// -----------------------------TipoServicio---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear un tipo de usuario
 	 * 
@@ -231,9 +249,15 @@ public class Controller {
 	 * @return
 	 */
 	@PostMapping("/registroTipoServicio")
-	public ResponseEntity<?> registroTipoServicio(@RequestBody TipoServicio tipoServicio) {
+	public ResponseEntity<?> registroTipoServicio(@RequestBody TipoServicio tipoServicio) {		
+		if (tipoServicio.getTipoServicioId() != 0 && !services.findByIdTipoServicio(tipoServicio.getTipoServicioId()).isPresent()) {
+			if (services.saveTipoServicio(tipoServicio) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoServicio(tipoServicio));
+			}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoServicio(tipoServicio));
+		}
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+
 	}
 
 	/**
@@ -309,8 +333,7 @@ public class Controller {
 		return tipoServicio;
 	}
 
-	// -----------------------------//
-	// Servicio---------------------------------------------------
+	// -----------------------------Servicio---------------------------------------------------
 
 	/**
 	 * Sirve para registrar/crear un Servicio
@@ -318,12 +341,17 @@ public class Controller {
 	 * @param servicio
 	 * @return
 	 */
-
 	@PostMapping("/registroServicio")
 	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-	}
+		if (servicio.getServicioId() != 0 && !services.findByIdServicio(servicio.getServicioId()).isPresent()) {
+			if (services.saveServicio(servicio) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
+			}
 
+		}
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+
+	}
 
 	/**
 	 * Sirve para eliminar un Servicio
@@ -402,8 +430,7 @@ public class Controller {
 		return servicio;
 	}
 
-	// -----------------------------//
-	// Comentario---------------------------------------------------
+	// -----------------------------Comentario---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear un Comentario
 	 * 
@@ -412,10 +439,16 @@ public class Controller {
 	 */
 	@PostMapping("/registroComentario")
 	public ResponseEntity<?> registroComentario(@RequestBody Comentario comentario) {
+		if (comentario.getComentarioId() != 0 && !services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
+			if (services.saveComentario(comentario) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
+			}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
+		}
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+
 	}
-
+	
 	/**
 	 * Sirve para eliminar un comentario
 	 * 
@@ -490,8 +523,7 @@ public class Controller {
 		return comentario;
 	}
 
-	// -----------------------------//
-	// Cita---------------------------------------------------
+	// -----------------------------Cita---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear una Cita
 	 * 
@@ -500,8 +532,14 @@ public class Controller {
 	 */
 	@PostMapping("/registroCita")
 	public ResponseEntity<?> registroCita(@RequestBody Cita cita) {
+		if (cita.getCitaId() != 0 && !services.findByIdCita(cita.getCitaId()).isPresent()) {
+			if (services.saveCita(cita) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
+			}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
+		}
+		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+
 	}
 
 	/**

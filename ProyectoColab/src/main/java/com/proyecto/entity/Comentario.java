@@ -30,7 +30,7 @@ public class Comentario implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "personaId")
-	private Usuario usuario;
+	private int usuario;
 
 	public int getComentarioId() {
 		return comentarioId;
@@ -56,11 +56,11 @@ public class Comentario implements Serializable {
 		this.calificacion = calificacion;
 	}
 
-	public Usuario getUsuario() {
+	public int getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(int usuario) {
 		this.usuario = usuario;
 	}
 
@@ -81,7 +81,4 @@ public class Comentario implements Serializable {
 		return comentarioId == other.comentarioId;
 	}
 
-	
-	
-	
 }
