@@ -84,37 +84,6 @@ public class ServiceAppImpl implements ServiceApp {
 		
 		
 	}
-/**
-	@Override
-	public List<Object> autenticarUsuario(String email, String password) {
-
-		int numero = 0;
-		List<Object> lista = new ArrayList<Object>();
-		try {
-
-			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("autenticarUsuario");
-
-			// Registrar los parámetros de entrada y salida
-			storedProcedureQuery.registerStoredProcedureParameter("parametro1", String.class, ParameterMode.IN);
-			storedProcedureQuery.registerStoredProcedureParameter("parametro2", String.class, ParameterMode.IN);
-
-			// Configuramos el valor de entrada
-			storedProcedureQuery.setParameter("parametro1", email);
-			storedProcedureQuery.setParameter("parametro2", password);
-
-			// Realizamos la llamada al procedimiento
-			storedProcedureQuery.execute();
-
-			lista = storedProcedureQuery.getResultList();
-
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-			numero = -1;
-		}
-		return lista;
-	}
-**/	
 	
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
@@ -178,33 +147,9 @@ public class ServiceAppImpl implements ServiceApp {
 
 	@Override
 	@Transactional
-	public boolean saveServicio(Servicio servicio) {
-		boolean validar = false;
-		List<Object> lista = new ArrayList<Object>();
-		try {
-
-			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("SafeLife.serviceInProc");
-
-			// Registrar los parámetros de entrada y salida
-			storedProcedureQuery.registerStoredProcedureParameter("nombreServicio", String.class, ParameterMode.IN);
-			storedProcedureQuery.registerStoredProcedureParameter("precio", int.class, ParameterMode.IN);
-			storedProcedureQuery.registerStoredProcedureParameter("tipoServicio", int.class, ParameterMode.IN);
-
-			// Configuramos el valor de entrada
-			storedProcedureQuery.setParameter("nombreServicio", servicio.getNombreServicio());
-			storedProcedureQuery.setParameter("precio", servicio.getPrecio());
-			storedProcedureQuery.setParameter("tipoServicio", servicio.getTipoServicio());
-
-			// Realizamos la llamada al procedimiento
-			storedProcedureQuery.execute();
-
-			//lista = storedProcedureQuery.getResultList();
-
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-		}
-		return validar;
+	public String saveServicio(Servicio servicio) {
+		
+		return servicioRepository.ProcedureinsertarServicio(servicio.getNombreServicio(), servicio.getPrecio(), servicio.getTipoServicio());
 	}
 	
 

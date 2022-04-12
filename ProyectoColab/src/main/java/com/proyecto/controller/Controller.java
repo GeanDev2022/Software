@@ -62,19 +62,6 @@ public class Controller {
 		return services.Autenticarusuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
 	}
 
-	/**
-	 * @PostMapping("/autenticarUsuario") public List<Object>
-	 * autenticarUsuario(@RequestBody Usuario usuario) {
-	 * 
-	 * return services.autenticarUsuario(usuario.getEmailUsuario(),
-	 * usuario.getContrasenaUsuario()); }
-	 **/
-	/**
-	 * Sirve para eliminar un usuario
-	 * 
-	 * @param userId
-	 * @return
-	 */
 	@DeleteMapping("/borrarUsuario/{id}")
 	public ResponseEntity<?> borrarUsuario(@PathVariable(value = "id") int usuarioId) {
 
@@ -331,13 +318,12 @@ public class Controller {
 	 * @param servicio
 	 * @return
 	 */
-	/**
-	 * @PostMapping("/registroServicio") public ResponseEntity<?>
-	 * registroServicio(@RequestBody Servicio servicio) { int idaleatorio = (int)
-	 * (1000+Math.random()*7000000); servicio.setServicioId(idaleatorio); return
-	 * ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-	 * }
-	 **/
+
+	@PostMapping("/registroServicio")
+	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
+	}
+
 
 	/**
 	 * Sirve para eliminar un Servicio

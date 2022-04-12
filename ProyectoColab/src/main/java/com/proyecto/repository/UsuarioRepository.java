@@ -10,10 +10,10 @@ import com.proyecto.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
-/**
+
 	@Query(value = "select Autenticarusuario", nativeQuery = true)
 	String Sautenticarusuario(String email, String contrasena);
-**/
+	
 	@Procedure(procedureName = "Autenticarusuario")
 	String Procedureautenticarusuario(String email, String contrasena);
 	
