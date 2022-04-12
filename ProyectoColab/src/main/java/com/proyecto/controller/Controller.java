@@ -52,7 +52,7 @@ public class Controller {
 			}
 
 		}
-		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.notFound().build();
 
 	}
 	
@@ -164,7 +164,7 @@ public class Controller {
 			}
 
 		}
-		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.notFound().build();
 
 	}
 	
@@ -256,7 +256,7 @@ public class Controller {
 			}
 
 		}
-		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.notFound().build();
 
 	}
 
@@ -349,7 +349,7 @@ public class Controller {
 			}
 
 		}
-		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.notFound().build();
 
 	}
 
@@ -445,7 +445,7 @@ public class Controller {
 			}
 
 		}
-		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.notFound().build();
 
 	}
 	
@@ -538,7 +538,7 @@ public class Controller {
 			}
 
 		}
-		return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED);
+		return ResponseEntity.notFound().build();
 
 	}
 

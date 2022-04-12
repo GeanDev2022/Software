@@ -13,9 +13,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	@Procedure(procedureName = "autenticarusuario")
 	String Procedureautenticarusuario(String email, String contrasena);
 	
+	
 	@Procedure(procedureName = "crearusuario")
 	String ProcedureinsertarUsuario(int cedulapersona, int celularpersona, String direccionpersona,
-			int edadpersona, String nombrepersona, String contrasenapersona, String emailusuario, int tipoUsuario);
+			int edadpersona, String nombrepersona, String contrasenapersona, String emailusuario, TipoUsuario tipoUsuario);
 	
 	@Procedure(procedureName = "modificarusuario")
 	String ProceduremodificarUsuario(int personaId, int cedulapersona, int celularpersona, String direccionpersona,
