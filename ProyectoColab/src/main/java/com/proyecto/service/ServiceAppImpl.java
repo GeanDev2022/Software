@@ -176,7 +176,7 @@ public class ServiceAppImpl implements ServiceApp {
 		try {
 
 			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("SafeLife.serviceInProc");
+					.createStoredProcedureQuery("BD_SafeLife.serviceInProc");
 
 			// Registrar los parámetros de entrada y salida
 			storedProcedureQuery.registerStoredProcedureParameter("nombreServicio", String.class, ParameterMode.IN);

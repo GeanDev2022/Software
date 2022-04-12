@@ -324,8 +324,6 @@ public class Controller {
 	 */
 	@PostMapping("/registroServicio")
 	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
-		int idaleatorio = (int) (1000+Math.random()*7000000);
-		servicio.setServicioId(idaleatorio);
 		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
 	}
 
