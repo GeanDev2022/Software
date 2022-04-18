@@ -40,7 +40,7 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
     </li></br>
     <!-- 3 -->
     <li><p>Luego abre servers, posterior register y finalmente server: </p>
-    <img src="./V/Screenshot_3.png"/>
+    <img src="./Img/Screenshot_3.png"/>
     </li></br>
     <!-- 4 -->
     <li><p>Se coloca nombre a la BD: BD_SafeLife(nombre opcional): </p>
