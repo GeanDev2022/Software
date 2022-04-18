@@ -4,7 +4,7 @@
 
 <p>El proceso se realiza en un sistema operativo `Windows 10` acompañado de cada app necesario para le buen funcionamiento: </p>
 <ul>
-    <li><a href="https://www.eclipse.org/downloads/">Eclipse</a> (IDE for java developers 2021-09)</li>
+    <li><a href="https://www.eclipse.org/downloads/packages/release/2021-09/r">Eclipse</a> (IDE for java developers 2021-09)</li>
     <li><a href="https://www.postgresql.org/download/">PostgreSQL</a> (Version 14)</li>
     <li><a href="https://www.java.com/es/download/ie_manual.jsp">Java</a> (Version 8 Update 321)</li>
 </ul>
