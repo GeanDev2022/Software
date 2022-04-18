@@ -1,7 +1,7 @@
 package com.proyecto.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -34,7 +34,7 @@ public class Cita implements Serializable {
 	private String direccionCita;
 
 	@ManyToOne
-	@JoinColumn(name = "personaId")
+	@JoinColumn(name = "cedulaPersona")
 	private Usuario usuario;
 
 	@OneToOne

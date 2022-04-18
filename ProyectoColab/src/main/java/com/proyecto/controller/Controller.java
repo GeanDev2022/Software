@@ -1,5 +1,6 @@
 package com.proyecto.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,26 +46,22 @@ public class Controller {
 	 */
 	@PostMapping("/registroUsuario")
 	public ResponseEntity<?> registroUsuario(@RequestBody Usuario usuario) {
-	
+
 		if (usuario.getCedulaPersona() != 0 && !services.findByIdUsuario(usuario.getCedulaPersona()).isPresent()) {
-			if (services.saveUsuario(usuario) != null) {
-				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveUsuario(usuario));
-			}
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveUsuario(usuario));
 
 		}
 		return ResponseEntity.notFound().build();
 
 	}
-	
+
 	/**
-	 * 	@PostMapping("/registroServicio")
-	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-	}
+	 * @PostMapping("/registroServicio") public ResponseEntity<?>
+	 * registroServicio(@RequestBody Servicio servicio) { return
+	 * ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
+	 * }
 	 */
 
-	
-	
 	/**
 	 * 
 	 * @param usuario
@@ -97,24 +94,22 @@ public class Controller {
 	@PutMapping("/actualizarUsuario/{id}")
 	public ResponseEntity<?> updateUser(@RequestBody Usuario detalleUsuario,
 			@PathVariable(value = "id") int usuarioId) {
+		Usuario usuario = new Usuario();
+		String resp = services.buscarUsuario(usuarioId);
+		if (resp.length() > 1) {
+			usuario.setCedulaPersona(detalleUsuario.getCedulaPersona());
+			usuario.setNombrePersona(detalleUsuario.getNombrePersona());
+			usuario.setEdadPersona(detalleUsuario.getEdadPersona());
+			usuario.setDireccionPersona(detalleUsuario.getDireccionPersona());
+			usuario.setCelularPersona(detalleUsuario.getCelularPersona());
+			usuario.setEmailUsuario(detalleUsuario.getEmailUsuario());
+			usuario.setContrasenaUsuario(detalleUsuario.getContrasenaUsuario());
+			usuario.setTipoUsuario(detalleUsuario.getTipoUsuario());
 
-		Optional<Usuario> usuario = services.findByIdUsuario(usuarioId);
-
-		if (!services.findByIdUsuario(usuarioId).isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarUsuario(usuario));
+		} else {
 			return ResponseEntity.notFound().build();
 		}
-
-		usuario.get().setPersonaId(detalleUsuario.getPersonaId());
-		usuario.get().setCedulaPersona(detalleUsuario.getCedulaPersona());
-		usuario.get().setNombrePersona(detalleUsuario.getNombrePersona());
-		usuario.get().setEdadPersona(detalleUsuario.getEdadPersona());
-		usuario.get().setDireccionPersona(detalleUsuario.getDireccionPersona());
-		usuario.get().setCelularPersona(detalleUsuario.getCelularPersona());
-		usuario.get().setEmailUsuario(detalleUsuario.getEmailUsuario());
-		usuario.get().setContrasenaUsuario(detalleUsuario.getContrasenaUsuario());
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveUsuario(usuario.get()));
-
 	}
 
 	/**
@@ -125,14 +120,12 @@ public class Controller {
 	 */
 	@GetMapping("/leerUsuario/{id}")
 	public ResponseEntity<?> leerUsuario(@PathVariable(value = "id") int usuarioId) {
-
-		Optional<Usuario> usuario = services.findByIdUsuario(usuarioId);
-		if (!usuario.isPresent()) {
+		String resp = services.buscarUsuario(usuarioId);
+		if (resp.length() > 1) {
+			return ResponseEntity.ok(resp);
+		} else {
 			return ResponseEntity.notFound().build();
 		}
-
-		return ResponseEntity.ok(usuario);
-
 	}
 
 	/**
@@ -157,8 +150,9 @@ public class Controller {
 	 * @return
 	 */
 	@PostMapping("/registroTipoUsuario")
-	public ResponseEntity<?> registroTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {		
-		if (tipoUsuario.getTipoUsuarioId() != 0 && !services.findByIdTipoUsuario(tipoUsuario.getTipoUsuarioId()).isPresent()) {
+	public ResponseEntity<?> registroTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
+		if (tipoUsuario.getTipoUsuarioId() != 0
+				&& !services.findByIdTipoUsuario(tipoUsuario.getTipoUsuarioId()).isPresent()) {
 			if (services.saveTipoUsuario(tipoUsuario) != null) {
 				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoUsuario(tipoUsuario));
 			}
@@ -167,7 +161,7 @@ public class Controller {
 		return ResponseEntity.notFound().build();
 
 	}
-	
+
 	/**
 	 * Sirve para eliminar un tipo de usuario
 	 * 
@@ -249,8 +243,9 @@ public class Controller {
 	 * @return
 	 */
 	@PostMapping("/registroTipoServicio")
-	public ResponseEntity<?> registroTipoServicio(@RequestBody TipoServicio tipoServicio) {		
-		if (tipoServicio.getTipoServicioId() != 0 && !services.findByIdTipoServicio(tipoServicio.getTipoServicioId()).isPresent()) {
+	public ResponseEntity<?> registroTipoServicio(@RequestBody TipoServicio tipoServicio) {
+		if (tipoServicio.getTipoServicioId() != 0
+				&& !services.findByIdTipoServicio(tipoServicio.getTipoServicioId()).isPresent()) {
 			if (services.saveTipoServicio(tipoServicio) != null) {
 				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoServicio(tipoServicio));
 			}
@@ -343,14 +338,7 @@ public class Controller {
 	 */
 	@PostMapping("/registroServicio")
 	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
-		if (servicio.getServicioId() != 0 && !services.findByIdServicio(servicio.getServicioId()).isPresent()) {
-			if (services.saveServicio(servicio) != null) {
-				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-			}
-
-		}
-		return ResponseEntity.notFound().build();
-
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
 	}
 
 	/**
@@ -367,7 +355,7 @@ public class Controller {
 		}
 
 		services.deleteByIdServicio(servicioId);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.status(200).build();
 	}
 
 	/**
@@ -377,26 +365,23 @@ public class Controller {
 	 * @param servicioId
 	 * @return
 	 */
-	/**
-	 * @PutMapping("/actualizarServicio/{id}") public ResponseEntity<?>
-	 * actualizarServicio(@RequestBody Servicio detallesServicio,
-	 * 
-	 * @PathVariable(value = "id") int servicioId) {
-	 * 
-	 *                     Optional<Servicio> servicio =
-	 *                     services.findByIdServicio(servicioId);
-	 * 
-	 *                     if (!services.findByIdServicio(servicioId).isPresent()) {
-	 *                     return ResponseEntity.notFound().build(); }
-	 * 
-	 *                     servicio.get().setServicioId(detallesServicio.getServicioId());
-	 *                     servicio.get().setNombreServicio(detallesServicio.getNombreServicio());
-	 * 
-	 *                     return
-	 *                     ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio.get()));
-	 * 
-	 *                     }
-	 **/
+
+	@PutMapping("/actualizarServicio/{id}")
+	public ResponseEntity<?> actualizarServicio(@RequestBody Servicio detallesServicio,@PathVariable(value = "id") int servicioId) {
+
+		Servicio servicio = new Servicio();
+		String resp = services.buscarServicio(servicioId);
+		if (resp.length() > 1) {
+			servicio.setNombreServicio(detallesServicio.getNombreServicio());
+			servicio.setPrecio(detallesServicio.getPrecio());
+			servicio.setTipoServicio(detallesServicio.getTipoServicio());
+			servicio.setServicioId(detallesServicio.getServicioId());
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarServicio(servicio));
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 	/**
 	 * Sirve para Leer un Servicio
@@ -439,7 +424,8 @@ public class Controller {
 	 */
 	@PostMapping("/registroComentario")
 	public ResponseEntity<?> registroComentario(@RequestBody Comentario comentario) {
-		if (comentario.getComentarioId() != 0 && !services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
+		if (comentario.getComentarioId() != 0
+				&& !services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
 			if (services.saveComentario(comentario) != null) {
 				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
 			}
@@ -448,7 +434,7 @@ public class Controller {
 		return ResponseEntity.notFound().build();
 
 	}
-	
+
 	/**
 	 * Sirve para eliminar un comentario
 	 * 
@@ -532,14 +518,10 @@ public class Controller {
 	 */
 	@PostMapping("/registroCita")
 	public ResponseEntity<?> registroCita(@RequestBody Cita cita) {
-		if (cita.getCitaId() != 0 && !services.findByIdCita(cita.getCitaId()).isPresent()) {
-			if (services.saveCita(cita) != null) {
-				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
-			}
-
+		if ( !services.findByIdCita(cita.getCitaId()).isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
 		}
 		return ResponseEntity.notFound().build();
-
 	}
 
 	/**

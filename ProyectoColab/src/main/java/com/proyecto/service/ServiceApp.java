@@ -20,8 +20,10 @@ public interface ServiceApp {
 	public Iterable<Usuario> findAllUsuario();
 	public Page<Usuario> findAllUsuario(Pageable pageable);
 	public Optional<Usuario> findByIdUsuario(int id);
+	public String buscarUsuario(int id);
 	public void deleteByIdUsuario(int id);
 	public String Autenticarusuario(String email, String contrasena);
+	public String actualizarUsuario(Usuario usuario);
 	
 	// TipoUsuario
 	public String saveTipoUsuario(TipoUsuario tipoUsuario);
@@ -43,6 +45,8 @@ public interface ServiceApp {
 	public Page<Servicio> findAllServicio(Pageable pageable);
 	public Optional<Servicio> findByIdServicio(int id);
 	public void deleteByIdServicio(int id);
+	public String buscarServicio(int id);
+	public String actualizarServicio (Servicio servicio);
 
 	// Comentario
 	public String saveComentario(Comentario comentario);

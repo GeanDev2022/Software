@@ -27,9 +27,7 @@ public class TipoUsuario implements Serializable {
 	@Column(name = "nombreTipoUsuario", length = 200, nullable = false)
 	private String nombreTipoUsuario;
 
-	@OneToMany(mappedBy = "tipoUsuario")
-	@JsonIgnore
-	private List<Usuario> usuario;
+	
 
 	public int getTipoUsuarioId() {
 		return tipoUsuarioId;
@@ -47,13 +45,6 @@ public class TipoUsuario implements Serializable {
 		this.nombreTipoUsuario = nombreTipoUsuario;
 	}
 
-	public List<Usuario> getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
-	}
 
 	@Override
 	public int hashCode() {

@@ -64,6 +64,12 @@ public class ServiceAppImpl implements ServiceApp {
 	public Page<Usuario> findAllUsuario(Pageable pageable) {
 		return usuarioRepository.findAll(pageable);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public String buscarUsuario(int id) {
+		return usuarioRepository.ProcedureBuscarUsuario(id);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -79,8 +85,13 @@ public class ServiceAppImpl implements ServiceApp {
 
 	public String Autenticarusuario(String email, String contrasena){
 		return usuarioRepository.Procedureautenticarusuario(email, contrasena);
-		
-		
+	}
+	@Override
+	@Transactional
+	public String actualizarUsuario(Usuario usuario){
+	
+		return usuarioRepository.ProceduremodificarUsuario(usuario.getCedulaPersona(), usuario.getCelularPersona(), usuario.getDireccionPersona(),
+				usuario.getNombrePersona(), usuario.getContrasenaUsuario(), usuario.getEmailUsuario(), usuario.getTipoUsuario());
 	}
 	
 	// ---------------------------------------TipoUsuario------------------------------------
@@ -150,6 +161,18 @@ public class ServiceAppImpl implements ServiceApp {
 		return servicioRepository.ProcedureinsertarServicio(servicio.getNombreServicio(), servicio.getPrecio(), servicio.getTipoServicio());
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public String buscarServicio(int id) {
+		return servicioRepository.ProcedureBuscarServicio(id);
+	}
+	@Override
+	@Transactional
+	public String actualizarServicio (Servicio servicio){
+		
+		return servicioRepository.ProceduremodificarServicio(servicio.getServicioId(), servicio.getNombreServicio(),
+				servicio.getPrecio(), servicio.getTipoServicio());
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -206,7 +229,7 @@ public class ServiceAppImpl implements ServiceApp {
 	// ---------------------------------------Cita------------------------------------
 	@Override
 	public String saveCita(Cita cita) {
-		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getFechaCita(), cita.getServicio(), cita.getUsuario());
+		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId());
 	}
 
 	@Override

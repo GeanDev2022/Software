@@ -15,4 +15,7 @@ public interface ServicioRepository extends JpaRepository<Servicio, Integer> {
 	
 	@Procedure(procedureName = "eliminarservicio")
 	String ProcedureeliminarServicio(int servicioId);
+	
+	@Procedure(procedureName = "buscarservicio")
+	String ProcedureBuscarServicio(int servicioId);
 }

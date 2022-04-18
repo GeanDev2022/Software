@@ -23,10 +23,9 @@ public class Usuario extends Persona implements Serializable {
 
 	@Column(name = "contrasenaUsuario", length = 300, nullable = false)
 	private String contrasenaUsuario;
-
-	@ManyToOne
-	@JoinColumn(name = "tipoUsuarioId")
-	private TipoUsuario tipoUsuario;
+	
+	@Column(name = "tipoUsuario")
+	private int tipoUsuario;
 
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
@@ -52,11 +51,11 @@ public class Usuario extends Persona implements Serializable {
 		this.contrasenaUsuario = contrasenaUsuario;
 	}
 
-	public TipoUsuario getTipoUsuario() {
+	public int getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
