@@ -49,10 +49,10 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
     <!-- 5 -->
     <li><p>Vamos a configurar nuestra BD: </p>
     Nos dirigimos hacia el menu Connection e ingresamos los datos:</br>
-    <strong>Host: </strong>ec2-34-192-210-139.compute-1.amazonaws.com</br>
-    <strong>Database: </strong>d3uef5qnrfdnk2</br>
-    <strong>User: </strong>gsiyywzbkfonjy</br>
-    <strong>Password: </strong>7df55e61c0ebcc9a79d0e7af8d3f26b18d5bdf53c474451a9a52c585fc49e3fe</br>   
+    <strong>Host: </strong>ec2-18-214-134-226.compute-1.amazonaws.com</br>
+    <strong>Database: </strong>d4g3aaahil971t</br>
+    <strong>User: </strong>prizigyckacpqw</br>
+    <strong>Password: </strong>e2d23030a963fde759b5f8453ef983aeef8643ccfe444de26948dad7b98d3a35</br>   
     <img src="./Img/Screenshot_5.png"/>
     </li></br>
     <!-- 6 -->
