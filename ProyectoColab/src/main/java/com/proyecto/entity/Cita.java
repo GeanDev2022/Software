@@ -34,7 +34,7 @@ public class Cita implements Serializable {
 	private String direccionCita;
 
 	@ManyToOne
-	@JoinColumn(name = "cedulaPersona")
+	@JoinColumn(name = "personaId")
 	private Usuario usuario;
 
 	@OneToOne
