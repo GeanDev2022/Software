@@ -4,7 +4,7 @@
 
 <p>El proceso se realiza en un sistema operativo `Windows 10` acompañado de cada app necesario para le buen funcionamiento: </p>
 <ul>
-    <li><a href="https://www.eclipse.org/downloads/">Eclipse</a> (IDE for java developers 2021-09)</li>
+    <li><a href="https://www.eclipse.org/downloads/packages/release/2021-09/r">Eclipse</a> (IDE for java developers 2021-09)</li>
     <li><a href="https://www.postgresql.org/download/">PostgreSQL</a> (Version 14)</li>
     <li><a href="https://www.java.com/es/download/ie_manual.jsp">Java</a> (Version 8 Update 321)</li>
 </ul>
@@ -40,7 +40,7 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
     </li></br>
     <!-- 3 -->
     <li><p>Luego abre servers, posterior register y finalmente server: </p>
-    <img src="./V/Screenshot_3.png"/>
+    <img src="./Img/Screenshot_3.png"/>
     </li></br>
     <!-- 4 -->
     <li><p>Se coloca nombre a la BD: BD_SafeLife(nombre opcional): </p>
@@ -49,10 +49,10 @@ Luego buscamos Sprinboot en el Find e instalamos "Spring tools 3 Add-On for Spri
     <!-- 5 -->
     <li><p>Vamos a configurar nuestra BD: </p>
     Nos dirigimos hacia el menu Connection e ingresamos los datos:</br>
-    <strong>Host: </strong>ec2-34-192-210-139.compute-1.amazonaws.com</br>
-    <strong>Database: </strong>d3uef5qnrfdnk2</br>
-    <strong>User: </strong>gsiyywzbkfonjy</br>
-    <strong>Password: </strong>7df55e61c0ebcc9a79d0e7af8d3f26b18d5bdf53c474451a9a52c585fc49e3fe</br>   
+    <strong>Host: </strong>ec2-18-214-134-226.compute-1.amazonaws.com</br>
+    <strong>Database: </strong>d4g3aaahil971t</br>
+    <strong>User: </strong>prizigyckacpqw</br>
+    <strong>Password: </strong>e2d23030a963fde759b5f8453ef983aeef8643ccfe444de26948dad7b98d3a35</br>   
     <img src="./Img/Screenshot_5.png"/>
     </li></br>
     <!-- 6 -->
