@@ -519,6 +519,11 @@ public class Controller {
 	@PostMapping("/registroCita")
 	public ResponseEntity<?> registroCita(@RequestBody Cita cita) {
 		if ( !services.findByIdCita(cita.getCitaId()).isPresent()) {
+			
+			if(cita.getServicio().getServicioId()==0)
+			{
+				cita.getServicio().setServicioId(1);
+			}
 			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
 		}
 		return ResponseEntity.notFound().build();
@@ -561,7 +566,7 @@ public class Controller {
 		cita.get().setFechaCita(detallesCita.getFechaCita());
 		cita.get().setDireccionCita(detallesCita.getDireccionCita());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.updateCita(cita.get()));
 
 	}
 

@@ -61,7 +61,7 @@ public interface ServiceApp {
 	public Page<Cita> findAllCita(Pageable pageable);
 	public Optional<Cita> findByIdCita(int id);
 	public void deleteByIdCita(int id);
-	
+	public String updateCita(Cita cita);
 	
 
 }
