@@ -1,5 +1,6 @@
 package com.proyecto.service;
 
+import java.util.Date;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -252,6 +253,11 @@ public class ServiceAppImpl implements ServiceApp {
 	public String saveCita(Cita cita) {
 		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getServicio().getServicioId(),
 				cita.getUsuario().getPersonaId());
+	}
+	
+	@Override
+	public String updateCita(Cita cita) {
+		return citaRepository.ProceduremodificarCita(cita.getCitaId(), cita.getDireccionCita(), cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId());
 	}
 
 	@Override
