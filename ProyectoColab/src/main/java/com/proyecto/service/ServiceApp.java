@@ -30,7 +30,8 @@ public interface ServiceApp {
 	public Iterable<TipoUsuario> findAllTipoUsuario();
 	public Page<TipoUsuario> findAllTipoUsuario(Pageable pageable);
 	public Optional<TipoUsuario> findByIdTipoUsuario(int id);
-	public void deleteByIdTipoUsuario(int id);	
+	public void deleteByIdTipoUsuario(int id);
+	public String actualizarTipoUsuario(TipoUsuario tipoUsuario);
 	
 	// TipoServicio
 	public String saveTipoServicio(TipoServicio tipoServicio);
@@ -38,6 +39,7 @@ public interface ServiceApp {
 	public Page<TipoServicio> findAllTipoServicio(Pageable pageable);
 	public Optional<TipoServicio> findByIdTipoServicio(int id);
 	public void deleteByIdTipoServicio(int id);
+	public String actualizarTipoServicio(TipoServicio tipoServicio);
 	
 	// Servicio
 	public String saveServicio(Servicio servicio);
@@ -54,6 +56,7 @@ public interface ServiceApp {
 	public Page<Comentario> findAllComentario(Pageable pageable);
 	public Optional<Comentario> findByIdComentario(int id);
 	public void deleteByIdComentario(int id);
+	//public String actualizarComentario(Comentario comentario);
 	
 	// Cita
 	public String saveCita(Cita cita);
@@ -61,6 +64,8 @@ public interface ServiceApp {
 	public Page<Cita> findAllCita(Pageable pageable);
 	public Optional<Cita> findByIdCita(int id);
 	public void deleteByIdCita(int id);
+	public String actualizarFechaCita(Cita cita);
+	//public String actualizarCita(Cita cita);
 	
 	
 

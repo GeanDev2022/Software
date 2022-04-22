@@ -1,6 +1,5 @@
 package com.proyecto.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.entity.Cita;
@@ -55,12 +53,6 @@ public class Controller {
 
 	}
 
-	/**
-	 * @PostMapping("/registroServicio") public ResponseEntity<?>
-	 * registroServicio(@RequestBody Servicio servicio) { return
-	 * ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-	 * }
-	 */
 
 	/**
 	 * 
@@ -560,6 +552,27 @@ public class Controller {
 		cita.get().setCitaId(detallesCita.getCitaId());
 		cita.get().setFechaCita(detallesCita.getFechaCita());
 		cita.get().setDireccionCita(detallesCita.getDireccionCita());
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita.get()));
+
+	}
+	
+	/**
+	 * Sirve para actualizar una fecha de una Cita
+	 * 
+	 * @param detallesCita
+	 * @param citaId
+	 * @return
+	 */
+	@PutMapping("/actualizarFechaCita/{id}")
+	public ResponseEntity<?> actualizarFechaCita(@RequestBody Cita detallesCita, @PathVariable(value = "id") int citaId) {
+
+		Optional<Cita> cita = services.findByIdCita(citaId);
+
+		if (!services.findByIdCita(citaId).isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		cita.get().setFechaCita(detallesCita.getFechaCita());
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita.get()));
 

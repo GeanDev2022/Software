@@ -12,7 +12,7 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Integer>
 	String ProcedureinsertarComentario(int calificacion, String resenaComentario, Usuario personaId);
 	
 	@Procedure(procedureName = "modificarcomentario")
-	String ProceduremodificarrComentario(int comentarioId, int calificacion, String resenaComentario, int personaId);
+	String ProceduremodificarComentario(int comentarioId, int calificacion, String resenaComentario, Usuario usuario);
 	
 	@Procedure(procedureName = "eliminarcomentario")
 	String ProcedureeliminarComentario(int comentarioId);
