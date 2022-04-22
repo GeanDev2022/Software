@@ -1,7 +1,8 @@
 package com.proyecto.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Cita")
@@ -26,7 +29,7 @@ public class Cita implements Serializable {
 	private int citaId;
 
 	// mirar si es java.sql o java.util
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private Date fechaCita;
 
 	@Column(name = "direccionCita", length = 300, nullable = false)
@@ -35,6 +38,13 @@ public class Cita implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "personaId")
 	private Usuario usuario;
+
+	@Column(name = "doctor")
+	private int doctor;
+
+	@OneToMany(mappedBy = "cita")
+	@JsonIgnore
+	private List<Comentario> comentario;
 
 	@OneToOne
 	private Servicio servicio;
@@ -77,6 +87,22 @@ public class Cita implements Serializable {
 
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
+	}
+
+	public int getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(int doctor) {
+		this.doctor = doctor;
+	}
+
+	public List<Comentario> getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(List<Comentario> comentario) {
+		this.comentario = comentario;
 	}
 
 	@Override

@@ -32,6 +32,10 @@ public class Usuario extends Persona implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private List<Cita> cita;
+	
+	@OneToMany(mappedBy = "doctor")
+	@JsonIgnore
+	private List<Cita> citaDoctor;
 
 	public String getEmailUsuario() {
 		return emailUsuario;

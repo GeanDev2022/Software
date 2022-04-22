@@ -56,7 +56,7 @@ public interface ServiceApp {
 	public Page<Comentario> findAllComentario(Pageable pageable);
 	public Optional<Comentario> findByIdComentario(int id);
 	public void deleteByIdComentario(int id);
-	//public String actualizarComentario(Comentario comentario);
+	public String actualizarComentario(Comentario comentario);
 	
 	// Cita
 	public String saveCita(Cita cita);
@@ -64,9 +64,7 @@ public interface ServiceApp {
 	public Page<Cita> findAllCita(Pageable pageable);
 	public Optional<Cita> findByIdCita(int id);
 	public void deleteByIdCita(int id);
-
 	public String actualizarFechaCita(Cita cita);
-	//public String actualizarCita(Cita cita);
 	public String updateCita(Cita cita);
 	
 

@@ -32,6 +32,10 @@ public class Comentario implements Serializable {
 	@JoinColumn(name = "personaId")
 	private Usuario usuario;
 
+	@ManyToOne
+	@JoinColumn(name = "citaId")
+	private Cita cita;
+
 	public int getComentarioId() {
 		return comentarioId;
 	}
@@ -62,6 +66,14 @@ public class Comentario implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Cita getCita() {
+		return cita;
+	}
+
+	public void setCita(Cita cita) {
+		this.cita = cita;
 	}
 
 	@Override

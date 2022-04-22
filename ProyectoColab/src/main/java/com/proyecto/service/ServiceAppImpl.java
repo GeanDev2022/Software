@@ -214,7 +214,8 @@ public class ServiceAppImpl implements ServiceApp {
 	@Override
 	public String saveComentario(Comentario comentario) {
 		return comentarioRepository.ProcedureinsertarComentario(comentario.getCalificacion(),
-				comentario.getResenaComentario(), comentario.getUsuario());
+				comentario.getResenaComentario(), comentario.getUsuario().getPersonaId(),
+				comentario.getCita().getCitaId());
 	}
 
 	@Override
@@ -239,25 +240,27 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdComentario(int id) {
 		comentarioRepository.deleteById(id);
 	}
-/**
+
 	@Override
 	@Transactional
 	public String actualizarComentario(Comentario comentario) {
 
-		return comentarioRepository.ProceduremodificarComentario(comentario.getComentarioId(),
-				comentario.getCalificacion(), comentario.getResenaComentario(), comentario.getUsuario());
+		return comentarioRepository.ProceduremodificarComentario(comentario.getCalificacion(),
+				comentario.getResenaComentario(), comentario.getUsuario().getPersonaId(),
+				comentario.getCita().getCitaId());
 	}
-**/
+
 	// ---------------------------------------Cita------------------------------------
 	@Override
 	public String saveCita(Cita cita) {
-		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getServicio().getServicioId(),
-				cita.getUsuario().getPersonaId());
+		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getFechaCita(),
+				cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId(), cita.getDoctor());
 	}
-	
+
 	@Override
 	public String updateCita(Cita cita) {
-		return citaRepository.ProceduremodificarCita(cita.getCitaId(), cita.getDireccionCita(), cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId());
+		return citaRepository.ProceduremodificarCita(cita.getCitaId(), cita.getDireccionCita(), cita.getFechaCita(),
+				cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId(), cita.getDoctor());
 	}
 
 	@Override
@@ -282,20 +285,20 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdCita(int id) {
 		citaRepository.deleteById(id);
 	}
-	
+
 	@Override
 	@Transactional
 	public String actualizarFechaCita(Cita cita) {
 
 		return citaRepository.ProceduremodificarFechaCita(cita.getCitaId(), cita.getFechaCita());
 	}
-/**	
-	@Override
-	@Transactional
-	public String actualizarCita(Cita cita) {
-
-		return citaRepository.ProceduremodificarCita(cita.getCitaId(), cita.getDireccionCita(), cita.getFechaCita(), cita.getServicio(), cita.getUsuario());
-	}
-**/
+	/**
+	 * @Override
+	 * @Transactional public String actualizarCita(Cita cita) {
+	 * 
+	 *                return citaRepository.ProceduremodificarCita(cita.getCitaId(),
+	 *                cita.getDireccionCita(), cita.getFechaCita(),
+	 *                cita.getServicio(), cita.getUsuario()); }
+	 **/
 
 }

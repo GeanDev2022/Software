@@ -502,6 +502,7 @@ public class Controller {
 	}
 
 	// -----------------------------Cita---------------------------------------------------
+	
 	/**
 	 * Sirve para registrar/crear una Cita
 	 * 
@@ -555,13 +556,17 @@ public class Controller {
 		}
 
 		cita.get().setCitaId(detallesCita.getCitaId());
-		cita.get().setFechaCita(detallesCita.getFechaCita());
 		cita.get().setDireccionCita(detallesCita.getDireccionCita());
+		cita.get().setFechaCita(detallesCita.getFechaCita());
+		cita.get().setServicio(detallesCita.getServicio());
+		cita.get().setUsuario(detallesCita.getUsuario());
+		cita.get().setDoctor(detallesCita.getDoctor());
+
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(services.updateCita(cita.get()));
 
 	}
-	
+
 	/**
 	 * Sirve para actualizar una fecha de una Cita
 	 * 
@@ -569,6 +574,7 @@ public class Controller {
 	 * @param citaId
 	 * @return
 	 */
+	/**	
 	@PutMapping("/actualizarFechaCita/{id}")
 	public ResponseEntity<?> actualizarFechaCita(@RequestBody Cita detallesCita, @PathVariable(value = "id") int citaId) {
 
@@ -579,10 +585,10 @@ public class Controller {
 		}
 		cita.get().setFechaCita(detallesCita.getFechaCita());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarFechaCita(cita.get()));
 
 	}
-
+**/
 	/**
 	 * Sirve para Leer un cita
 	 * 
