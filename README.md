@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# GUIA DE INSTALACION DEL FRONTEND
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+instalaremos el gestor de paquetes npm y plugins para trabajar con react - redux
+<ol>
+    <li><a href="https://www.google.com/chrome/">Google Chrome</a></li>
+    <li><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=es&authuser=1">React Developer Tools</a></li>
+    <li><a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=es">Redux Devtools</a></li>
+    <li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+    <li><a href="https://nodejs.org/es/">Node</a></li>
+</ol>
 
-## Available Scripts
+# Node 
 
-In the project directory, you can run:
+instalaremos la version 16.14.2 LTS Recomendado para la mayoria
 
-### `npm start`
+# React
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+una vez descargado el proyecto, en visual studio code, en la terminal instalaremos las siguientes librerias:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+<b>npm i react-router-dom</b>                     ----             manejo de rutas  <br/>
+<b>npm install react-redux redux  </b>            ----              libreria de redux para trabajar con estados<br/>
+<b>npm i redux-thunk </b>                         ----              middleware para trabajar  con acciones asincronicas <br/>
+<b>npm install sweetalert2 </b>                   ----              para visualizar los mensajes de las acciones<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://user-images.githubusercontent.com/73712509/162595142-04404dbc-96e6-477e-b1bb-4b0b70965354.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+por ultimo, en nuestra terminal escribimos el comando npm start, para correr  nuestro proyecto en local
 
-### `npm run eject`
+![image](https://user-images.githubusercontent.com/73712509/163895655-d8083742-bd3c-4de0-8d12-909eb7863626.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        
+ 
