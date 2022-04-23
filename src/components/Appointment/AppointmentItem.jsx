@@ -1,12 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { getItemAppointment } from '../../actions/appointmentAction';
+import {  isvalidate } from '../../actions/servicesAction';
 
-export const AppointmentItem = ({i, fechaCita, Direccion}) => {
+export const AppointmentItem = ({i, citaId, fechaCita, direccionCita, servicio, usuario, doctor }) => {
 
     const dispatch = useDispatch()
     const handleItem = () => {
-        dispatch(getItemAppointment(i, fechaCita, Direccion))
+        dispatch(getItemAppointment(i, citaId, fechaCita,  direccionCita, servicio, usuario, doctor))
+        dispatch(isvalidate(true));
       }
   return (
     <tr>
@@ -17,7 +19,10 @@ export const AppointmentItem = ({i, fechaCita, Direccion}) => {
         </button>
       </td>
       <td>{fechaCita}</td>
-      <td>{Direccion}</td>
+      <td>{direccionCita}</td>
+      <td>{servicio.nombreServicio}</td>
+      <td>{usuario.emailUsuario}</td>
+      <td>{doctor}</td>
     </tr>
   )
 }

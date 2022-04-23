@@ -6,8 +6,10 @@ export const authReducer = (state = {}, action) => {
         case types.login:
 
             return {
-                username: action.payload.username,
-                password: action.payload.password
+                cedula: action.payload.cedula,
+                nombre: action.payload.nombre,
+                tipousuario: action.payload.tipousuario,
+                Item: false
             }
         case types.logout:
             return {}
@@ -18,6 +20,21 @@ export const authReducer = (state = {}, action) => {
                 username: action.payload.username,
                 password: action.payload.password
             }
+
+        case types.update:
+
+            return {
+                ...state,
+                username: action.payload.username,
+                password: action.payload.password
+            }
+
+        case types.visibleValidate:
+
+            return {
+                ...state,
+                Item: action.payload.validate
+            };
         default:
             return state;
     }

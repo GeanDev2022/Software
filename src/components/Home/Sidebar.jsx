@@ -1,7 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 export const Sidebar = () => {
+
+
+    const { tipousuario} = useSelector((state) => state.auth)
+
     return (
         <aside className='sidebar bg-dark'>
 
@@ -12,7 +17,7 @@ export const Sidebar = () => {
             <hr id='hr1' />
             <nav className='navbar'>
                 <ul className='navbar-nav'>
-                    <li className='nav-item px-3'>
+                    {/* <li className='nav-item px-3'>
                         <NavLink className='nav-link navs' to='/home/history'>
                             Subir historia clinica
                         </NavLink>
@@ -22,24 +27,31 @@ export const Sidebar = () => {
                         <NavLink className='nav-link navs' to='/home/patients'>
                             Pacientes
                         </NavLink>
-                    </li>
-                    <li className='nav-item px-3'>
+                    </li> */}
+                   {tipousuario==='3'&& <li className='nav-item px-3'>
                         <NavLink className='nav-link navs' to='/home/profile'>
                             Editar perfil
                         </NavLink>
                     </li>
+                    
+                    }
 
-                    <li className='nav-item px-3'>
+                 { tipousuario==='2'&&<li className='nav-item px-3'>
                         <NavLink className='nav-link navs' to='/home/services'>
                             Administrador de servicios
                         </NavLink>
-                    </li>
+                    </li>}
 
-                    <li className='nav-item px-3'>
+                    {tipousuario==='3'&&<li className='nav-item px-3'>
                         <NavLink className='nav-link navs' to='/home/appointment'>
                             Administrador de citas
                         </NavLink>
-                    </li>
+                    </li>}
+                    {tipousuario==='3'&&<li className='nav-item px-3'>
+                        <NavLink className='nav-link navs' to='/home/comments'>
+                            Administrador de comentarios
+                        </NavLink>
+                    </li>}
                 </ul>
             </nav>
         </aside >

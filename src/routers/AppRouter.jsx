@@ -10,11 +10,11 @@ import { PublicRouter } from './PublicRouter'
 
 export const AppRouter = () => {
 
-    const {username} = useSelector(state => state.auth)
+    const {cedula} = useSelector(state => state.auth)
     const [state, setstate] = useState(false);
 
     useEffect(() => {
-        if(username)
+        if(cedula)
         {
             setstate(true);
         }
@@ -22,7 +22,7 @@ export const AppRouter = () => {
             setstate(false);
         }
       
-    }, [username])
+    }, [cedula])
 
 
     return (

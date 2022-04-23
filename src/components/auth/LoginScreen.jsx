@@ -7,8 +7,8 @@ import { useForm } from '../../hooks/useForm'
 export const LoginScreen = () => {
   const dispatch = useDispatch()
   const [state, handleOnChange] = useForm({
-    username: 'alfie solomons',
-    password: '12345',
+    username: 'gean@uq.com',
+    password: '123',
   })
   const { username, password } = state
 
@@ -19,7 +19,7 @@ export const LoginScreen = () => {
 
   return (
     <div className="container col-4 mt-5 border rounded  login">
-      <h1 className="h2" id="tittle">
+      <h1 className="h2 h2-color" id="tittle">
         Inicio de sesión
       </h1>
       <hr />

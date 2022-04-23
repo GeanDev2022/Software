@@ -13,8 +13,9 @@ export const useForm = (initialState = {}) => {
         });
     }
 
-    const handleReset = ()=>{
-        setstate(initialState)
+    const handleReset = (newInitial)=>{
+
+        setstate(newInitial)
     }
 
     return [state, handleOnChange,setstate,handleReset];

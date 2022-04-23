@@ -1,37 +1,31 @@
 import { types } from "../types/types";
 
-
-export const appointmentReducer = (state = {}, action) => {
-
-
+export const commentReducer = (state = {}, action) => {
 
     switch (action.type) {
-        case types.appointment:
+        case types.comment:
 
             return {
-                appointment: {
+                comment: {
                     ...action.payload
                 }
             }
 
-        case types.itemAppointment:
+        case types.itemComment:
 
             return {
                 ...state,
-                itemAppointment: {
+                itemComment: {
                     ...action.payload
                 }
             };
-        case types.appointmentload:
+        case types.commentload:
 
             return {
                 ...state,
-                appointmentload: [...action.payload]
+                commentload: [...action.payload]
                 
             };
-
-
-
         default:
             return state;
     }

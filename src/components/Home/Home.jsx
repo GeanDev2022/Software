@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Appointment } from '../Appointment/Appointment'
+import { Comment } from '../comments/Comment'
 import { Services } from '../Services/Services'
 import { GoUpHistory } from './GoUpHistory'
 import { Navbar } from './Navbar'
@@ -22,6 +23,7 @@ export const Home = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/services" element={<Services />} />
             <Route path="/appointment" element={<Appointment />} />
+            <Route path="/comments" element={<Comment />} />
           </Routes>
         </main>
       </div>

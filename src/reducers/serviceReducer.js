@@ -8,6 +8,7 @@ export const serviceReducer = (state = {}, action) => {
         case types.service:
 
             return {
+                ...state,
                 Service: {
                     ...action.payload.service
                 }
@@ -16,12 +17,18 @@ export const serviceReducer = (state = {}, action) => {
         case types.itemService:
 
             return {
-                itemService:{
+                ...state,
+                itemService: {
                     ...action.payload
                 }
             };
 
+        case types.serviceload:
 
+            return {
+                servicesload: [...action.payload]
+            };
+   
         default:
             return state;
     }

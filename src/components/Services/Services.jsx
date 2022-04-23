@@ -1,73 +1,117 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { startService } from '../../actions/servicesAction'
+import Swal from 'sweetalert2'
+import {
+  isvalidate,
+  listService,
+  startService,
+  updateService,
+} from '../../actions/servicesAction'
+import { fetchBackend } from '../../helpers/fetch'
 import { useForm } from '../../hooks/useForm'
 import { ServicesList } from './ServicesList'
 
 export const Services = () => {
   const dispatch = useDispatch()
-  const { itemService } = useSelector((state) => state.Service)
+  const { itemService, servicesload } = useSelector((state) => state.Service)
+  const { Item: validate } = useSelector((state) => state.auth)
   const [services, handleOnChange, setService] = useForm({
-    Nombre: 'consulta de pediatria',
-    Precio: 12000,
-    TipoServicio: 2,
+    nombreServicio: 'consulta de pediatria',
+    precio: 12000,
+    tipoServicio: 1,
+    servicioId: 0,
+  })
+  const { nombreServicio, precio, tipoServicio, servicioId } = services
+
+  const [listnew, , setlistnew] = useForm({
+    value: true,
   })
 
-  const { Nombre, Precio, TipoServicio } = services
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(listService())
+    }, 1000)
+  }, [validate, listnew])
 
-  //data momentanea
-  const data = [
-    {
-      nombre: 'consulta general de pediatria',
-      Precio: 2200,
-      TipoServicio: 'presencial',
-    },
-    {
-      nombre: 'cirugia',
-      Precio: 1600,
-      TipoServicio: 'presencial',
-    },
-    {
-      nombre: 'consulta general de pediatria',
-      Precio: 25000,
-      TipoServicio: 'presencial',
-    },
-    {
-      nombre: 'cirugia',
-      Precio: 5300,
-      TipoServicio: 'presencial',
-    },
-  ]
+  useEffect(() => {
+    if (!!itemService) {
+      const { nombre, Precio, TipoServicio: tipo, servicioId } = itemService
+      setService({
+        nombreServicio: nombre,
+        precio: Precio,
+        tipoServicio: tipo,
+        servicioId,
+      })
+    }
+  }, [itemService])
 
   const handleService = (e) => {
     e.preventDefault()
     dispatch(startService(services))
+    setService({
+      nombreServicio: '',
+      precio: 0,
+      tipoServicio: 0,
+      servicioId: 0,
+    })
+    setlistnew({
+      listnew: true,
+    })
   }
 
-  useEffect(() => {
-    if (!!itemService) {
-      const { nombre, Precio: precio, TipoServicio: tipo } = itemService
+  const handlecancel = () => {
+    dispatch(isvalidate(false))
+    setService({
+      nombreServicio: '',
+      precio: 0,
+      tipoServicio: 0,
+      servicioId: 0,
+    })
+  }
 
-      setService({
-        Nombre: nombre,
-        Precio: precio,
-        TipoServicio: tipo,
-      })
+  const handleDelete = async()=>
+  {
+    const resp = await fetchBackend(`borrarServicio/${services.servicioId}`, {}, 'DELETE')
+    const data = await resp.text();
+    if(resp.status === 200)
+    {
+      Swal.fire('Success', 'Registro eliminado con exito', 'success');
     }
-  }, [itemService])
+    else{
+      Swal.fire('Error', 'Error, intente nuevamente', 'error');
+    }
+    dispatch(isvalidate(false))
+  }
+
+  const handleUpdate = () => {
+    dispatch(updateService(services))
+    dispatch(isvalidate(false))
+  }
 
   return (
     <div className="container">
       <h1 className="h1-register my-3">Servicios</h1>
       <div className="border div-form">
         <form onSubmit={handleService}>
+          {servicioId !== 0 && (
+            <input
+              className="form-control"
+              type="text"
+              disabled={true}
+              name="servicioId"
+              placeholder="Nombre"
+              onChange={handleOnChange}
+              value={servicioId}
+              autoComplete="off"
+            />
+          )}
           <input
             className="form-control"
             type="text"
-            name="Nombre"
+            name="nombreServicio"
             placeholder="Nombre"
             onChange={handleOnChange}
-            value={Nombre}
+            value={nombreServicio}
             autoComplete="off"
           />
           <br />
@@ -75,36 +119,62 @@ export const Services = () => {
           <input
             className="form-control"
             type="number"
-            name="Precio"
+            name="precio"
             placeholder="Precio"
             onChange={handleOnChange}
-            value={Precio}
+            value={precio}
             autoComplete="off"
           />
           <br />
-
-          <input
-            className="form-control"
-            type="text"
-            name="TipoServicio"
-            placeholder="TipoServicio"
+          <select
+            className="form-select"
             onChange={handleOnChange}
-            value={TipoServicio}
-            autoComplete="off"
-          />
-          <br />
-          <button
-            type="submit"
-            className="btn btn-outline-primary button-login"
+            value={tipoServicio}
+            name="tipoServicio"
           >
-            Crear Servicio
-          </button>
+            <option value="1">Virtual</option>
+            <option value="2">Presencial</option>
+          </select>
+          <br />
+          {validate === false && (
+            <button
+              type="submit"
+              className="btn btn-outline-primary button-login d-inline mx-2"
+            >
+              Crear Servicio
+            </button>
+          )}
         </form>
-      </div>
+        {validate && (
+          <button
+            className="btn btn-outline-success button-login d-inline mx-2"
+            onClick={handleUpdate}
+          >
+            Actualizar Servicio
+          </button>
+        )}
 
-      <div className="container">
-        <ServicesList data={data} />
+        {validate && (
+          <button className="btn btn-outline-danger button-login d-inline mx-2"
+          onClick={handleDelete}>
+            Eliminar Servicio
+          </button>
+        )}
+
+        {validate && (
+          <button
+            className="btn btn-outline-danger button-login d-inline mx-2"
+            onClick={handlecancel}
+          >
+            Cancelar Servicio
+          </button>
+        )}
       </div>
+      {!!servicesload && (
+        <div className="container">
+          <ServicesList data={servicesload} />
+        </div>
+      )}
     </div>
   )
 }

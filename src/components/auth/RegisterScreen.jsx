@@ -9,27 +9,23 @@ export const RegisterScreen = () => {
     const dispatch = useDispatch()
 
   const [user, handleOnChange] = useForm({
-    Cedula: 1010111,
-    Nombre: 'Samantha',
-    FechaNacimiento: '10/10/2000',
-    Direccion: 'norte',
-    Correo: 'Sam@email.com',
-    Celular: 3102569875,
-    TipoUsuario: 1,
-    Username: 'saman12',
-    Password: '123456',
+    cedulaPersona: 1010111,
+    celularPersona: 15225,
+    nombrePersona: 'Samantha',
+    direccionPersona: 'norte',
+    emailUsuario: 'Sam@email.com',
+    tipoUsuario: 1,
+    contrasenaUsuario: '123456',
   })
 
   const {
-    Cedula,
-    Nombre,
-    FechaNacimiento,
-    Direccion,
-    Correo,
-    Celular,
-    TipoUsuario,
-    Username,
-    Password,
+    cedulaPersona,
+    celularPersona,
+    nombrePersona,
+    direccionPersona,
+    emailUsuario,
+    tipoUsuario,
+    contrasenaUsuario,
   } = user
 
 
@@ -41,16 +37,16 @@ export const RegisterScreen = () => {
 
   return (
     <div className="container">
-      <h1 className='h1-register my-3'>Registro</h1>
+      <h1 className='h1-register my-3 h2-color'>Registro</h1>
       <div className="border div-form">
         <form onSubmit={handleRegister}>
           <input
             className="form-control"
             type="number"
-            name="Cedula"
+            name="cedulaPersona"
             placeholder="Cedula"
             onChange={handleOnChange}
-            value={Cedula}
+            value={cedulaPersona}
             autoComplete="off"
           />
           <br />
@@ -58,14 +54,14 @@ export const RegisterScreen = () => {
           <input
             className="form-control"
             type="text"
-            name="Nombre"
+            name="nombrePersona"
             placeholder="Nombre"
             onChange={handleOnChange}
-            value={Nombre}
+            value={nombrePersona}
             autoComplete="off"
           />
           <br />
-          <input
+          {/* <input
             className="form-control"
             type="date"
             name="FechaNacimiento"
@@ -74,48 +70,48 @@ export const RegisterScreen = () => {
             value={FechaNacimiento}
             autoComplete="off"
           />
-          <br />
+          <br /> */}
           <input
             className="form-control"
             type="text"
-            name="Direccion"
+            name="direccionPersona"
             placeholder="Direccion"
             onChange={handleOnChange}
-            value={Direccion}
+            value={direccionPersona}
             autoComplete="off"
           />
           <br />
           <input
             className="form-control"
             type="email"
-            name="Correo"
+            name="emailUsuario"
             placeholder="Correo"
             onChange={handleOnChange}
-            value={Correo}
+            value={emailUsuario}
             autoComplete="off"
           />
           <br />
           <input
             className="form-control"
             type="number"
-            name="Celular"
+            name="celularPersona"
             placeholder="Celular"
             onChange={handleOnChange}
-            value={Celular}
+            value={celularPersona}
             autoComplete="off"
           />
           <br />
           <input
             className="form-control"
             type="number"
-            name="TipoUsuario"
+            name="tipoUsuario"
             placeholder="TipoUsuario"
             onChange={handleOnChange}
-            value={TipoUsuario}
+            value={tipoUsuario}
             autoComplete="off"
           />
           <br />
-          <input
+          {/* <input
             className="form-control"
             type="text"
             name="Username"
@@ -124,14 +120,14 @@ export const RegisterScreen = () => {
             value={Username}
             autoComplete="off"
           />
-          <br />
+          <br /> */}
           <input
             className="form-control"
             type="password"
-            name="Password"
+            name="contrasenaUsuario"
             placeholder="Password"
             onChange={handleOnChange}
-            value={Password}
+            value={contrasenaUsuario}
             autoComplete="off"
           />
           <br />

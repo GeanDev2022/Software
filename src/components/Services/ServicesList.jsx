@@ -2,6 +2,7 @@ import React from 'react'
 import { ServicesItem } from './ServicesItem'
 
 export const ServicesList = ({ data }) => {
+
   return (
     <table className="table table-dark table-hover mt-5 ">
       <thead>

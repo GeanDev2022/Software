@@ -1,54 +1,70 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { startUpdate } from '../../actions/auth'
+import { fetchBackend } from '../../helpers/fetch'
 import { useForm } from '../../hooks/useForm'
 
 export const Profile = () => {
 
 
-    const dispatch = useDispatch()
+  const {cedula} = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
 
-    const [user, handleOnChange] = useForm({
-      Cedula: 1010111,
-      Nombre: 'Samantha',
-      //FechaNacimiento: '10/10/2000',
-      Direccion: 'norte',
-      Correo: 'Sam@email.com',
-      Celular: 3102569875,
-     // TipoUsuario: 1,
-     // Username: 'saman12',
-      Password: '123456',
+  const [user, handleOnChange, setUser] = useForm({
+    cedulaPersona: 0,
+    celularPersona: 0,
+    nombrePersona: '',
+    direccionPersona: '',
+    emailUsuario: '',
+    tipoUsuario: 0,
+    contrasenaUsuario: '',
+  })
+
+  const {
+    cedulaPersona,
+    celularPersona,
+    nombrePersona,
+    direccionPersona,
+    emailUsuario,
+    tipoUsuario,
+    contrasenaUsuario,
+  } = user
+
+  useEffect(async () => {
+    const resp = await fetchBackend(`leerUsuario/${cedula}`, {});
+    const data = await resp.text();
+    const user = data.split("|")
+
+    setUser({
+      cedulaPersona : user[0],
+      celularPersona : user[1],
+      direccionPersona : user[2],
+      nombrePersona : user[3],
+      contrasenaUsuario : user[4],
+      emailUsuario : user[5],
+      tipoUsuario : user[6],
+
     })
+  }, [cedula])
   
-    const {
-      Cedula,
-      Nombre,
-      //FechaNacimiento,
-      Direccion,
-      Correo,
-      Celular,
-     // TipoUsuario,
-     // Username,
-      Password,
-    } = user
-  
-  
-    const handleUpdateProfile = (e) => {
-      e.preventDefault()
-      //dispatch(startRegister(user));
-    }
+  const handleRegister = (e) => {
+    e.preventDefault()
+   dispatch(startUpdate(user));
+  }
+
 
   return (
     <div className="container">
-      <h1 className='h1-register my-3'>Actualizar perfil</h1>
+      <h1 className='h1-register my-3 h2-color'>Actualizar</h1>
       <div className="border div-form">
-        <form onSubmit={handleUpdateProfile}>
+        <form onSubmit={handleRegister}>
           <input
             className="form-control"
             type="number"
-            name="Cedula"
+            name="cedulaPersona"
             placeholder="Cedula"
             onChange={handleOnChange}
-            value={Cedula}
+            value={cedulaPersona}
             autoComplete="off"
           />
           <br />
@@ -56,10 +72,10 @@ export const Profile = () => {
           <input
             className="form-control"
             type="text"
-            name="Nombre"
+            name="nombrePersona"
             placeholder="Nombre"
             onChange={handleOnChange}
-            value={Nombre}
+            value={nombrePersona}
             autoComplete="off"
           />
           <br />
@@ -76,43 +92,43 @@ export const Profile = () => {
           <input
             className="form-control"
             type="text"
-            name="Direccion"
+            name="direccionPersona"
             placeholder="Direccion"
             onChange={handleOnChange}
-            value={Direccion}
+            value={direccionPersona}
             autoComplete="off"
           />
           <br />
           <input
             className="form-control"
             type="email"
-            name="Correo"
+            name="emailUsuario"
             placeholder="Correo"
             onChange={handleOnChange}
-            value={Correo}
+            value={emailUsuario}
             autoComplete="off"
           />
           <br />
           <input
             className="form-control"
             type="number"
-            name="Celular"
+            name="celularPersona"
             placeholder="Celular"
             onChange={handleOnChange}
-            value={Celular}
+            value={celularPersona}
             autoComplete="off"
           />
           <br />
-          {/* <input
+          <input
             className="form-control"
             type="number"
-            name="TipoUsuario"
+            name="tipoUsuario"
             placeholder="TipoUsuario"
             onChange={handleOnChange}
-            value={TipoUsuario}
+            value={tipoUsuario}
             autoComplete="off"
           />
-          <br /> */}
+          <br />
           {/* <input
             className="form-control"
             type="text"
@@ -126,15 +142,15 @@ export const Profile = () => {
           <input
             className="form-control"
             type="password"
-            name="Password"
+            name="contrasenaUsuario"
             placeholder="Password"
             onChange={handleOnChange}
-            value={Password}
+            value={contrasenaUsuario}
             autoComplete="off"
           />
           <br />
-          <button type="submit"  className='btn btn-outline-primary button-login'>
-                Actualizar
+          <button type="submit"  className='btn btn-outline-success button-login'>
+          Actualizar
           </button>
         </form>
       </div>
