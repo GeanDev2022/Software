@@ -15,7 +15,7 @@ public interface CitaRepository extends JpaRepository<Cita, Integer> {
 	String ProcedureinsertarCita(String direccionCita, Date fechaCita,int servicioservicioId, int personaId, int doctor);
 	
 	@Procedure(procedureName = "modificarcita")
-	String ProceduremodificarCita(int citaId,String direccionCita,Date fechaCita , int servicioservicioId, int personaId, int doctor);
+	String ProceduremodificarCita(int citaId,String direccionCita,Date fechaCita , int servicioservicioId, int personaId, int dock);
 	
 	@Procedure(procedureName = "modificarfechacita")
 	String ProceduremodificarFechaCita(int citaId, Date fechaCita);

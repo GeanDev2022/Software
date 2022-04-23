@@ -416,11 +416,9 @@ public class Controller {
 	 */
 	@PostMapping("/registroComentario")
 	public ResponseEntity<?> registroComentario(@RequestBody Comentario comentario) {
-		if (comentario.getComentarioId() != 0
-				&& !services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
-			if (services.saveComentario(comentario) != null) {
-				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
-			}
+		comentario.getUsuario().setPersonaId(1);
+		if (!services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
 
 		}
 		return ResponseEntity.notFound().build();
@@ -465,7 +463,7 @@ public class Controller {
 		comentario.get().setResenaComentario(detallesComentario.getResenaComentario());
 		comentario.get().setCalificacion(detallesComentario.getCalificacion());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarComentario(comentario.get()));
 
 	}
 

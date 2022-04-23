@@ -245,9 +245,8 @@ public class ServiceAppImpl implements ServiceApp {
 	@Transactional
 	public String actualizarComentario(Comentario comentario) {
 
-		return comentarioRepository.ProceduremodificarComentario(comentario.getCalificacion(),
-				comentario.getResenaComentario(), comentario.getUsuario().getPersonaId(),
-				comentario.getCita().getCitaId());
+		return comentarioRepository.ProceduremodificarComentario(comentario.getComentarioId(), comentario.getCalificacion(),
+				comentario.getResenaComentario(), comentario.getUsuario().getPersonaId());
 	}
 
 	// ---------------------------------------Cita------------------------------------
