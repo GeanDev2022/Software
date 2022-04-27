@@ -416,7 +416,7 @@ public class Controller {
 	 */
 	@PostMapping("/registroComentario")
 	public ResponseEntity<?> registroComentario(@RequestBody Comentario comentario) {
-		comentario.getUsuario().setPersonaId(1);
+		
 		if (!services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
 
