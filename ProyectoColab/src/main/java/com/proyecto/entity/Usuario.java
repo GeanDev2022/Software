@@ -5,12 +5,24 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@NamedStoredProcedureQueries({
+		@NamedStoredProcedureQuery(name = "em.ProcedureListarDoctores", procedureName = "listardoctores"),
+		@NamedStoredProcedureQuery(name = "em.ProcedureListarCitasUsuarios", procedureName = "listarcitasusuarios",
+		parameters = {
+				@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
+		})		
+})
+
 @Table(name = "Usuario")
 public class Usuario extends Persona implements Serializable {
 

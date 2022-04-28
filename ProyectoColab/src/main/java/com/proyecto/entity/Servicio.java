@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Servicio")
@@ -30,8 +27,6 @@ public class Servicio implements Serializable {
 
 	@Column(name = "tipoServicio")
 	private int tipoServicio;
-
-
 
 	public int getServicioId() {
 		return ServicioId;
@@ -64,8 +59,6 @@ public class Servicio implements Serializable {
 	public void setTipoServicio(int tipoServicio) {
 		this.tipoServicio = tipoServicio;
 	}
-
-
 
 	@Override
 	public int hashCode() {

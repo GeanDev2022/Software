@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.entity.Cita;
@@ -52,7 +53,6 @@ public class Controller {
 		return ResponseEntity.notFound().build();
 
 	}
-
 
 	/**
 	 * 
@@ -133,6 +133,30 @@ public class Controller {
 
 		return usuarios;
 	}
+	
+	@GetMapping("/listarDocTop")
+	public String listarDocTop() {
+
+		String doctor = services.listarDoctorTopCalificado();
+
+		return doctor;
+	}
+	
+	@GetMapping("/listarDoctores")
+	public Object listarDoctores() {
+
+		return services.listarDoctores();
+		
+	}
+	
+	@GetMapping("/listarCitasUsuarios")
+	public Object listarCitasUsuarios(@RequestParam int personId) {
+
+		return services.listarCitasUsuarios(personId);
+		
+	}
+	
+
 
 	// -----------------------------TipoUsuario---------------------------------------------------
 	/**
@@ -359,7 +383,8 @@ public class Controller {
 	 */
 
 	@PutMapping("/actualizarServicio/{id}")
-	public ResponseEntity<?> actualizarServicio(@RequestBody Servicio detallesServicio,@PathVariable(value = "id") int servicioId) {
+	public ResponseEntity<?> actualizarServicio(@RequestBody Servicio detallesServicio,
+			@PathVariable(value = "id") int servicioId) {
 
 		Servicio servicio = new Servicio();
 		String resp = services.buscarServicio(servicioId);
@@ -416,7 +441,7 @@ public class Controller {
 	 */
 	@PostMapping("/registroComentario")
 	public ResponseEntity<?> registroComentario(@RequestBody Comentario comentario) {
-		
+
 		if (!services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
 
@@ -500,7 +525,7 @@ public class Controller {
 	}
 
 	// -----------------------------Cita---------------------------------------------------
-	
+
 	/**
 	 * Sirve para registrar/crear una Cita
 	 * 
@@ -509,10 +534,9 @@ public class Controller {
 	 */
 	@PostMapping("/registroCita")
 	public ResponseEntity<?> registroCita(@RequestBody Cita cita) {
-		if ( !services.findByIdCita(cita.getCitaId()).isPresent()) {
-			
-			if(cita.getServicio().getServicioId()==0)
-			{
+		if (!services.findByIdCita(cita.getCitaId()).isPresent()) {
+
+			if (cita.getServicio().getServicioId() == 0) {
 				cita.getServicio().setServicioId(1);
 			}
 			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
@@ -560,7 +584,6 @@ public class Controller {
 		cita.get().setUsuario(detallesCita.getUsuario());
 		cita.get().setDoctor(detallesCita.getDoctor());
 
-
 		return ResponseEntity.status(HttpStatus.CREATED).body(services.updateCita(cita.get()));
 
 	}
@@ -572,21 +595,22 @@ public class Controller {
 	 * @param citaId
 	 * @return
 	 */
-	/**	
-	@PutMapping("/actualizarFechaCita/{id}")
-	public ResponseEntity<?> actualizarFechaCita(@RequestBody Cita detallesCita, @PathVariable(value = "id") int citaId) {
-
-		Optional<Cita> cita = services.findByIdCita(citaId);
-
-		if (!services.findByIdCita(citaId).isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		cita.get().setFechaCita(detallesCita.getFechaCita());
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarFechaCita(cita.get()));
-
-	}
-**/
+	/**
+	 * @PutMapping("/actualizarFechaCita/{id}") public ResponseEntity<?>
+	 * actualizarFechaCita(@RequestBody Cita detallesCita, @PathVariable(value =
+	 * "id") int citaId) {
+	 * 
+	 * Optional<Cita> cita = services.findByIdCita(citaId);
+	 * 
+	 * if (!services.findByIdCita(citaId).isPresent()) { return
+	 * ResponseEntity.notFound().build(); }
+	 * cita.get().setFechaCita(detallesCita.getFechaCita());
+	 * 
+	 * return
+	 * ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarFechaCita(cita.get()));
+	 * 
+	 * }
+	 **/
 	/**
 	 * Sirve para Leer un cita
 	 * 

@@ -1,7 +1,8 @@
 package com.proyecto.service;
 
-import java.util.Date;
 import java.util.Optional;
+import javax.persistence.*;
+import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +36,9 @@ public class ServiceAppImpl implements ServiceApp {
 	private ComentarioRepository comentarioRepository;
 	@Autowired
 	private CitaRepository citaRepository;
+
+	@PersistenceContext
+	EntityManager em;
 
 	// ---------------------------------------USER------------------------------------
 
@@ -87,6 +91,29 @@ public class ServiceAppImpl implements ServiceApp {
 		return usuarioRepository.ProceduremodificarUsuario(usuario.getCedulaPersona(), usuario.getCelularPersona(),
 				usuario.getDireccionPersona(), usuario.getNombrePersona(), usuario.getContrasenaUsuario(),
 				usuario.getEmailUsuario(), usuario.getTipoUsuario());
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public String listarDoctorTopCalificado() {
+		return usuarioRepository.ProcedureListarDoctorTopCalificado();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarDoctores() {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarDoctores");
+		spq.execute();
+		return spq.getResultList();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarCitasUsuarios(int personId) {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarCitasUsuarios");
+		spq.setParameter("personId", personId);
+		spq.execute();
+		return spq.getResultList();
 	}
 
 	// ---------------------------------------TipoUsuario------------------------------------
@@ -245,8 +272,8 @@ public class ServiceAppImpl implements ServiceApp {
 	@Transactional
 	public String actualizarComentario(Comentario comentario) {
 
-		return comentarioRepository.ProceduremodificarComentario(comentario.getComentarioId(), comentario.getCalificacion(),
-				comentario.getResenaComentario(), comentario.getUsuario().getPersonaId());
+		return comentarioRepository.ProceduremodificarComentario(comentario.getComentarioId(),
+				comentario.getCalificacion(), comentario.getResenaComentario(), comentario.getUsuario().getPersonaId());
 	}
 
 	// ---------------------------------------Cita------------------------------------
