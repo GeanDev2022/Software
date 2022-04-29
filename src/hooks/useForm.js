@@ -5,7 +5,6 @@ export const useForm = (initialState = {}) => {
     const [state, setstate] = useState(initialState)
 
 
-
     const handleOnChange =({target})=>{
         setstate({
             ...state,

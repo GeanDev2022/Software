@@ -6,9 +6,10 @@ import { types } from "../types/types";
 export const startAppointment = (appointment) => {
     return async (dispatch) => {
         //guardamos la cita en la bd
-      
+  
         const resp = await fetchBackend("registroCita", appointment, 'POST')
         const data = await resp.text();
+    
         if(data === 'OK')
         {
             Swal.fire('Success', 'Registro exitoso!', 'success')
@@ -25,6 +26,30 @@ export const listAppointment = () => {
          try {
             const resp = await handlelist('listarCita')
             dispatch(appointmentLoad(resp))
+        } catch (error) {
+            console.error(error)
+        }
+    }
+}
+
+export const listAppointmentUser = (id) => {
+    return async(dispatch) => {
+         try {
+        const resp = await fetchBackend(`listarCitasUsuarios/${id}`, {})
+        const data = await resp.json();
+        dispatch(appointmentuserLoad(data))
+        } catch (error) {
+            console.error(error)
+        }
+    }
+}
+
+export const listAppointmentUserDoctor = () => {
+    return async(dispatch) => {
+         try {
+        const resp = await fetchBackend(`listarDoctores`, {})
+        const data = await resp.json();
+        dispatch(userDoctorLoad(data))
         } catch (error) {
             console.error(error)
         }
@@ -54,4 +79,14 @@ export const getItemAppointment = (id, citaId, fechaCita,  direccionCita, servic
 export const appointmentLoad = (appointmentload) => ({
     type: types.appointmentload,
     payload: appointmentload
+})
+
+export const appointmentuserLoad = (appointmentuserload) => ({
+    type: types.appointReload,
+    payload: appointmentuserload
+})
+
+export const userDoctorLoad = (doctorload) => ({
+    type: types.userDoctor,
+    payload: doctorload
 })

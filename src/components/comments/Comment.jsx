@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
+import { listAppointment, listAppointmentUser } from '../../actions/appointmentAction'
 import { CommentsLoad, listComments, startComments } from '../../actions/commentsAction'
 import { isvalidate } from '../../actions/servicesAction'
 import { fetchBackend } from '../../helpers/fetch'
@@ -13,22 +14,25 @@ export const Comment = () => {
 
     const dispatch = useDispatch()
     const { itemComment, commentload } = useSelector((state) => state.Comment)
+    const { itemAppointment, appointmentUserload  } = useSelector((state) => state.Appointment)
     const { Item: validate, cedula } = useSelector((state) => state.auth)
     const [comment, handleOnChange, setComment] = useForm({
       comentarioId:0,
       calificacion: 2,
       resenaComentario: "buen servicio",
       usuario:{
-        personaid: cedula
+        personaId: cedula
       },
       cita:{
-        citaId: 2
+        citaId: 0
       }
     })
     const { comentarioId, calificacion, resenaComentario, usuario, cita } = comment
-    const {personaid} = usuario
-    const {citaId} = cita
-  
+    const [{direccionCita, codigoCita}, handleOnChangeASelect ] = useForm({
+      direccionCita : "",
+      codigoCita : 0
+    })
+    const {citaId} = cita;
     const [listnew, , setlistnew] = useForm({
       value: true,
     })
@@ -36,42 +40,52 @@ export const Comment = () => {
     useEffect(() => {
       setTimeout(() => {
         dispatch(listComments())
+        //dispatch(listAppointment())
+        dispatch(listAppointmentUser(cedula))
       }, 1000)
     }, [validate, listnew])
   
     useEffect(() => {
       if (!!itemComment) {
         const { comentarioId, calificacion, resenaComentario, usuario, cita} = itemComment
+        const {personaId} = usuario
+        const {citaId} = cita
         setComment({
           comentarioId,
           calificacion,
           resenaComentario,
           usuario:{
-            personaid: cedula
+            personaId
           },
           cita:{
-            citaId: 2
+            citaId
           }
         })
       }
     }, [itemComment])
+
+   
+
+     
   
     const handleComment = (e) => {
       e.preventDefault()
+
+      comment.cita.citaId = codigoCita
       dispatch(startComments(comment))
+      setlistnew({
+        listnew: true,
+      })
       setComment({
         comentarioId:0,
         calificacion: 0,
         resenaComentario: "",
         usuario:{
-          personaid: cedula
+          personaId: 0
         },
         cita:{
-          citaId: 2
+          citaId: 1
         }
-      })
-      setlistnew({
-        listnew: true,
       })
     }
 
@@ -146,6 +160,7 @@ export const Comment = () => {
         />
         <br />
 
+
         <input
           className="form-control"
           type="text"
@@ -156,15 +171,19 @@ export const Comment = () => {
           autoComplete="off"
         />
         <br />
-        {/* <select
-          className="form-select"
-          onChange={handleOnChange}
-          value={tipoServicio}
-          name="tipoServicio"
-        >
-          <option value="1">Virtual</option>
-          <option value="2">Presencial</option>
-        </select> */}
+        <select
+            className="form-select"
+            value={codigoCita}
+            name = "codigoCita"
+            onChange={handleOnChangeASelect}
+          >
+           
+          {!!appointmentUserload&&appointmentUserload.map((values, i) => {
+          
+              return <option key={i} value={values[0]}> {values[1]}</option> 
+             })} 
+           </select>
+
         <br />
         {validate === false && (
           <button

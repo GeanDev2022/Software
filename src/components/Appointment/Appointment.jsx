@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
-import { listAppointment, startAppointment } from '../../actions/appointmentAction'
+import { listAppointment, listAppointmentUserDoctor, startAppointment, userDoctorLoad } from '../../actions/appointmentAction'
 import { isvalidate, listService } from '../../actions/servicesAction'
 import { fetchBackend } from '../../helpers/fetch'
 import { useForm } from '../../hooks/useForm'
@@ -15,7 +15,7 @@ export const Appointment = () => {
     fechaCita: '2022-10-10',
     direccionCita: 'carrera 15',
     servicio: {
-      ServicioId : 1
+      servicioId : 1
     },
     usuario: {
       personaId: cedula
@@ -23,34 +23,33 @@ export const Appointment = () => {
     doctor: 1
   })
   const { citaId,fechaCita, direccionCita,servicioid , doctor} = stateApointment
-  const { itemAppointment, appointmentload  } = useSelector((state) => state.Appointment)
+  const { itemAppointment, appointmentload, userDoctor  } = useSelector((state) => state.Appointment)
   const {  servicesload } = useSelector((state) => state.Service)
   const [listnew, , setlistnew] = useForm({
     value: true,
   })
 
-  // const data = 
-  //  [{
-  //     servicioId: 1,
-  //     nombreServicio: "15"
-  //   },
-  //   {
-  //     servicioId: 3,
-  //     nombreServicio: "16"
-  //   }
-  // ]
+  const [ {nombreServicio1, servicioCodigo}, handleOnChangeASelect ] = useForm({
+    nombreServicio1 : "",
+    servicioCodigo : 0
+  })
+
+  const [ {doctorname, doctorcode}, handleOnChangeASelectDoctor ] = useForm({
+    doctorname : "",
+    doctorcode : 0
+  })
+
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(listAppointment())
       dispatch(listService())
+      dispatch(listAppointmentUserDoctor())
     }, 1000)
   }, [validate, listnew])
 
-  const [servicesList, HandleOnChangeService] = useForm({
-    nombreServicio : "",
-    servicioId : 0
-  })
+
+
 
   useEffect(() => {
     if (!!itemAppointment) {
@@ -76,14 +75,9 @@ export const Appointment = () => {
   const handleAppointment = (e) => {
     e.preventDefault()
 
-    setAppointment({
-      ...startAppointment,
-      servicio: {
-        ServicioId: 2
-      } 
-    })
-  
-    
+    stateApointment.doctor = doctorcode
+    stateApointment.servicio.servicioId = servicioCodigo
+    console.log(doctorcode)
   dispatch(startAppointment(stateApointment))
     setlistnew({
       listnew: true,
@@ -185,28 +179,31 @@ export const Appointment = () => {
           <br />
           <select
             className="form-select"
-            value={servicesList}
-            onChange={HandleOnChangeService}
+            value={servicioCodigo}
+            name = "servicioCodigo"
+            onChange={handleOnChangeASelect}
           >
            
-          {/* {!!servicesload&&servicesload.map(({nombreServicio, servicioId}) => {
-             //console.log(nombreServicio, servicioId)
-              <option key={servicioId} value={servicioId}> {nombreServicio}</option>  })
-          } */}
+          {!!servicesload&&servicesload.map(({nombreServicio, servicioId}, i) => {
+              return <option key={i} value={servicioId}> {nombreServicio}</option> 
+             })} 
            </select>
             <br />
 
-          <input
-            className="form-control"
-            type="number"
-            name="doctor"
-            placeholder="doctor"
-            onChange={handleOnChange}
-            value={doctor}
-            autoComplete="off"
-          />
-     
-          <br />
+          <select
+            className="form-select"
+            value={doctorcode}
+            name = "doctorcode"
+            onChange={handleOnChangeASelectDoctor}
+          >
+           
+          {!!userDoctor&&userDoctor.map((values, i) => {
+              return <option key={i} value={values[0]}> {values[1]}</option> 
+             })} 
+           </select>
+            <br />
+
+
           {validate === false && (
             <button
               type="submit"

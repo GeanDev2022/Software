@@ -6,7 +6,7 @@ import { types } from "../types/types";
 export const startComments = (comment) => {
     return async (dispatch) => {
         //guardamos la cita en la bd
-      
+    
         const resp = await fetchBackend("registroComentario", comment, 'POST')
         const data = await resp.text();
         if(data === 'OK')

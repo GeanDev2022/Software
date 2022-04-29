@@ -49,6 +49,7 @@ export const Profile = () => {
   
   const handleRegister = (e) => {
     e.preventDefault()
+    user.cedulaPersona = cedula;
    dispatch(startUpdate(user));
   }
 

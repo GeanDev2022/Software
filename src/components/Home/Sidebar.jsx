@@ -52,6 +52,11 @@ export const Sidebar = () => {
                             Administrador de comentarios
                         </NavLink>
                     </li>}
+                            <li className='nav-item px-3'>
+                        <NavLink className='nav-link navs' to='/home/userCalifications'>
+                            Doctor mejor calificado
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </aside >

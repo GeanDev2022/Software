@@ -22,12 +22,27 @@ export const appointmentReducer = (state = {}, action) => {
                     ...action.payload
                 }
             };
-        case types.appointmentload:
 
+        case types.appointmentload:
             return {
                 ...state,
                 appointmentload: [...action.payload]
-                
+            };
+
+        case types.appointReload:
+
+            return {
+                ...state,
+                appointmentUserload: [...action.payload]
+
+            };
+
+        case types.userDoctor:
+
+            return {
+                ...state,
+                userDoctor: [...action.payload]
+
             };
 
 
