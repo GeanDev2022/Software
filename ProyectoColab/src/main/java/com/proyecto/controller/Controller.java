@@ -149,8 +149,8 @@ public class Controller {
 		
 	}
 	
-	@GetMapping("/listarCitasUsuarios")
-	public Object listarCitasUsuarios(@RequestParam int personId) {
+	@GetMapping("/listarCitasUsuarios/{id}")
+	public Object listarCitasUsuarios(@PathVariable(value = "id")  int personId) {
 
 		return services.listarCitasUsuarios(personId);
 		
