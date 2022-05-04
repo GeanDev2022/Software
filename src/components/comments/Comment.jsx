@@ -28,13 +28,13 @@ export const Comment = () => {
       }
     })
     const { comentarioId, calificacion, resenaComentario, usuario, cita } = comment
-    const [{direccionCita, codigoCita}, handleOnChangeASelect ] = useForm({
+    const [{direccionCita, codigoCita}, handleOnChangeASelect, statecita ] = useForm({
       direccionCita : "",
       codigoCita : 0
     })
     const {citaId} = cita;
     const [listnew, , setlistnew] = useForm({
-      value: true,
+      value: false,
     })
   
     useEffect(() => {
@@ -42,7 +42,7 @@ export const Comment = () => {
         dispatch(listComments())
         //dispatch(listAppointment())
         dispatch(listAppointmentUser(cedula))
-      }, 1000)
+      }, 2000)
     }, [validate, listnew])
   
     useEffect(() => {
@@ -50,15 +50,18 @@ export const Comment = () => {
         const { comentarioId, calificacion, resenaComentario, usuario, cita} = itemComment
         const {personaId} = usuario
         const {citaId} = cita
+        statecita({
+          codigoCita:citaId
+        })
         setComment({
           comentarioId,
           calificacion,
           resenaComentario,
           usuario:{
-            personaId
+            personaId: cedula
           },
           cita:{
-            citaId
+            citaId: cita
           }
         })
       }
@@ -76,32 +79,32 @@ export const Comment = () => {
       setlistnew({
         listnew: true,
       })
-      // setComment({
-      //   comentarioId:0,
-      //   calificacion: 0,
-      //   resenaComentario: "",
-      //   usuario:{
-      //     personaId: 0
-      //   },
-      //   cita:{
-      //     citaId: 1
-      //   }
-      // })
+      setComment({
+        comentarioId:0,
+        calificacion: 0,
+        resenaComentario: "",
+        usuario:{
+          personaId: cedula
+        },
+        cita:{
+          citaId: 0
+        }
+      })
     }
 
     const handlecancel = () => {
         dispatch(isvalidate(false))
-        // setComment({
-        //   comentarioId:0,
-        //   calificacion: 0,
-        //   resenaComentario: "",
-        //   usuario:{
-        //     personaid: cedula
-        //   },
-        //   cita:{
-        //     citaId: 2
-        //   }
-        // })
+        setComment({
+          comentarioId:0,
+          calificacion: 0,
+          resenaComentario: "",
+          usuario:{
+            personaId: cedula
+          },
+          cita:{
+            citaId: 0
+          }
+        })
       }
     
       const handleDelete = async()=>
@@ -119,6 +122,7 @@ export const Comment = () => {
       }
 
       const handleUpdate = async() => {
+        comment.cita.citaId = codigoCita
         const resp = await fetchBackend(`actualizarComentario/${comentarioId}`, comment, 'PUT')
         const data = await resp.text();
         if(data === 'OK')
@@ -129,6 +133,18 @@ export const Comment = () => {
           Swal.fire('Error','error, intente nuevamente', 'error')
         }
         dispatch(isvalidate(false))
+
+        setComment({
+          comentarioId:0,
+          calificacion: 0,
+          resenaComentario: "",
+          usuario:{
+            personaId: cedula
+          },
+          cita:{
+            citaId: 0
+          }
+        })
       }
 
 

@@ -9,6 +9,7 @@ export const appointmentReducer = (state = {}, action) => {
         case types.appointment:
 
             return {
+                ...state,
                 appointment: {
                     ...action.payload
                 }

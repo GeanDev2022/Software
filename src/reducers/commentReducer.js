@@ -6,6 +6,7 @@ export const commentReducer = (state = {}, action) => {
         case types.comment:
 
             return {
+                ...state,
                 comment: {
                     ...action.payload
                 }

@@ -15,26 +15,26 @@ export const Appointment = () => {
     fechaCita: '2022-10-10',
     direccionCita: 'carrera 15',
     servicio: {
-      servicioId : 1
+      servicioId : 0
     },
     usuario: {
       personaId: cedula
     },
     doctor: 1
   })
-  const { citaId,fechaCita, direccionCita,servicioid , doctor} = stateApointment
+  const { citaId,fechaCita, direccionCita,servicioId , doctor} = stateApointment
   const { itemAppointment, appointmentload, userDoctor  } = useSelector((state) => state.Appointment)
   const {  servicesload } = useSelector((state) => state.Service)
   const [listnew, , setlistnew] = useForm({
     value: true,
   })
 
-  const [ {nombreServicio1, servicioCodigo}, handleOnChangeASelect ] = useForm({
+  const [ {nombreServicio1, servicioCodigo}, handleOnChangeASelect, setappoin ] = useForm({
     nombreServicio1 : "",
     servicioCodigo : 0
   })
 
-  const [ {doctorname, doctorcode}, handleOnChangeASelectDoctor ] = useForm({
+  const [ {doctorname, doctorcode}, handleOnChangeASelectDoctor , setdoctor] = useForm({
     doctorname : "",
     doctorcode : 0
   })
@@ -56,7 +56,12 @@ export const Appointment = () => {
       const {citaId,  fechaCita: fecha, direccionCita: ubicacion, servicio, doctor } = itemAppointment
       const {servicioId} = servicio 
       if(fecha !== undefined && ubicacion !== undefined)
-     
+      setappoin({
+        servicioCodigo: servicioId
+      })
+      setdoctor({
+        doctorcode:doctor
+      })
       setAppointment({
         citaId,
         fechaCita: fecha,
@@ -70,6 +75,7 @@ export const Appointment = () => {
         doctor
       })
     }
+
   }, [itemAppointment])
 
   const handleAppointment = (e) => {
@@ -77,38 +83,40 @@ export const Appointment = () => {
 
     stateApointment.doctor = doctorcode
     stateApointment.servicio.servicioId = servicioCodigo
+    
   dispatch(startAppointment(stateApointment))
     setlistnew({
       listnew: true,
     })
 
-    // setAppointment({
-    //   citaId: 0,
-    //   fechaCita: '',
-    //   direccionCita: '',
-    //   servicio: {
-    //     ServicioId: 0
-    //   } ,
-    //   usuario:{
-    //     personaId:0
-    //   },
-    //   doctor : 1
-    // })
+    setAppointment({
+      citaId: 0,
+      fechaCita: '',
+      direccionCita: '',
+      servicio: {
+        servicioId : 0
+      },
+      usuario: {
+        personaId: cedula
+      },
+      doctor: 0
+    })
   }
 
   const handlecancel = () => {
     dispatch(isvalidate(false))
-    // setAppointment({
-    //   citaId: 0,
-    //   fechaCita: '',
-    //   direccionCita: '',
-    //   servicio: {
-    //     ServicioId: 0
-    //   } ,
-    //   usuario:{
-    //     personaId:0
-    //   }
-    // })
+    setAppointment({
+      citaId: 0,
+      fechaCita: '',
+      direccionCita: '',
+      servicio: {
+        servicioId : 0
+      },
+      usuario: {
+        personaId: cedula
+      },
+      doctor: 0
+    })
   
   }
 
@@ -126,6 +134,8 @@ export const Appointment = () => {
   }
 
   const handleUpdate = async() => {
+    stateApointment.doctor = doctorcode
+    stateApointment.servicio.servicioId = servicioCodigo
     const resp = await fetchBackend(`actualizarCita/${citaId}`, stateApointment, 'PUT')
     const data = await resp.text();
     if(data === 'OK')
@@ -136,6 +146,18 @@ export const Appointment = () => {
       Swal.fire('Error','error, intente nuevamente', 'error')
     }
     dispatch(isvalidate(false))
+    setAppointment({
+      citaId: 0,
+      fechaCita: '',
+      direccionCita: '',
+      servicio: {
+        servicioId : 0
+      },
+      usuario: {
+        personaId: cedula
+      },
+      doctor: 0
+    })
   }
 
   return (

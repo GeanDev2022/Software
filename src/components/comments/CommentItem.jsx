@@ -5,9 +5,6 @@ import { isvalidate } from '../../actions/servicesAction';
 
 export const CommentItem = ({i, comentarioId, calificacion, resenaComentario,usuario, cita }) => {
 
-
-
-
     const dispatch = useDispatch();
     const handleItem = () => {
    
