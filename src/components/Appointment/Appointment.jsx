@@ -77,39 +77,38 @@ export const Appointment = () => {
 
     stateApointment.doctor = doctorcode
     stateApointment.servicio.servicioId = servicioCodigo
-    console.log(doctorcode)
   dispatch(startAppointment(stateApointment))
     setlistnew({
       listnew: true,
     })
 
-    setAppointment({
-      citaId: 0,
-      fechaCita: '',
-      direccionCita: '',
-      servicio: {
-        ServicioId: 0
-      } ,
-      usuario:{
-        personaId:0
-      },
-      doctor : 1
-    })
+    // setAppointment({
+    //   citaId: 0,
+    //   fechaCita: '',
+    //   direccionCita: '',
+    //   servicio: {
+    //     ServicioId: 0
+    //   } ,
+    //   usuario:{
+    //     personaId:0
+    //   },
+    //   doctor : 1
+    // })
   }
 
   const handlecancel = () => {
     dispatch(isvalidate(false))
-    setAppointment({
-      citaId: 0,
-      fechaCita: '',
-      direccionCita: '',
-      servicio: {
-        ServicioId: 0
-      } ,
-      usuario:{
-        personaId:0
-      }
-    })
+    // setAppointment({
+    //   citaId: 0,
+    //   fechaCita: '',
+    //   direccionCita: '',
+    //   servicio: {
+    //     ServicioId: 0
+    //   } ,
+    //   usuario:{
+    //     personaId:0
+    //   }
+    // })
   
   }
 

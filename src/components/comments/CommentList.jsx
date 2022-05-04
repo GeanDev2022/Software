@@ -9,6 +9,7 @@ export const CommentList = ({ data }) => {
       <tr>
         <th scope="col">#</th>
         <th scope="col">Seleccionar</th>
+        <th scope="col">IdComentario</th>
         <th scope="col">Calificacion</th>
         <th scope="col">Servicio</th>
         <th scope="col">Comentario</th>

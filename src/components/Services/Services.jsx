@@ -48,12 +48,12 @@ export const Services = () => {
   const handleService = (e) => {
     e.preventDefault()
     dispatch(startService(services))
-    setService({
-      nombreServicio: '',
-      precio: 0,
-      tipoServicio: 0,
-      servicioId: 0,
-    })
+    // setService({
+    //   nombreServicio: '',
+    //   precio: 0,
+    //   tipoServicio: 0,
+    //   servicioId: 0,
+    // })
     setlistnew({
       listnew: true,
     })
@@ -61,12 +61,12 @@ export const Services = () => {
 
   const handlecancel = () => {
     dispatch(isvalidate(false))
-    setService({
-      nombreServicio: '',
-      precio: 0,
-      tipoServicio: 0,
-      servicioId: 0,
-    })
+    // setService({
+    //   nombreServicio: '',
+    //   precio: 0,
+    //   tipoServicio: 0,
+    //   servicioId: 0,
+    // })
   }
 
   const handleDelete = async()=>

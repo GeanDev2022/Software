@@ -76,32 +76,32 @@ export const Comment = () => {
       setlistnew({
         listnew: true,
       })
-      setComment({
-        comentarioId:0,
-        calificacion: 0,
-        resenaComentario: "",
-        usuario:{
-          personaId: 0
-        },
-        cita:{
-          citaId: 1
-        }
-      })
+      // setComment({
+      //   comentarioId:0,
+      //   calificacion: 0,
+      //   resenaComentario: "",
+      //   usuario:{
+      //     personaId: 0
+      //   },
+      //   cita:{
+      //     citaId: 1
+      //   }
+      // })
     }
 
     const handlecancel = () => {
         dispatch(isvalidate(false))
-        setComment({
-          comentarioId:0,
-          calificacion: 0,
-          resenaComentario: "",
-          usuario:{
-            personaid: cedula
-          },
-          cita:{
-            citaId: 2
-          }
-        })
+        // setComment({
+        //   comentarioId:0,
+        //   calificacion: 0,
+        //   resenaComentario: "",
+        //   usuario:{
+        //     personaid: cedula
+        //   },
+        //   cita:{
+        //     citaId: 2
+        //   }
+        // })
       }
     
       const handleDelete = async()=>
