@@ -11,8 +11,8 @@ export const CommentList = ({ data }) => {
         <th scope="col">Seleccionar</th>
         <th scope="col">IdComentario</th>
         <th scope="col">Calificacion</th>
-        <th scope="col">Servicio</th>
         <th scope="col">Comentario</th>
+        {/* <th scope="col">Servicio</th> */}
         <th scope="col">Usuario</th>
         <th scope="col">Cita</th>
       </tr>
