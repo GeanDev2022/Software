@@ -131,6 +131,18 @@ export const Appointment = () => {
       Swal.fire('Error', 'Error, intente nuevamente', 'error');
     }
     dispatch(isvalidate(false))
+    setAppointment({
+      citaId: 0,
+      fechaCita: '',
+      direccionCita: '',
+      servicio: {
+        servicioId : 0
+      },
+      usuario: {
+        personaId: cedula
+      },
+      doctor: 0
+    })
   }
 
   const handleUpdate = async() => {

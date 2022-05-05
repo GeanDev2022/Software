@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 import { startUpdate } from '../../actions/auth'
 import { fetchBackend } from '../../helpers/fetch'
 import { useForm } from '../../hooks/useForm'
@@ -53,6 +54,18 @@ export const Profile = () => {
    dispatch(startUpdate(user));
   }
 
+  const handledeleteuser  = async()=>
+  {
+    const resp = await fetchBackend(`borrarUsuario/${cedula}`, {}, 'DELETE');
+    if(resp.status === 200)
+    {
+      Swal.fire('Success', 'Registro eliminado con exito', 'success');
+    }
+    else{
+      Swal.fire('Error', 'Error, intente nuevamente', 'error');
+    }
+    window.location.reload(true)
+  }
 
   return (
     <div className="container">
@@ -154,6 +167,9 @@ export const Profile = () => {
           Actualizar
           </button>
         </form>
+        <button  className='btn btn-danger button-login' onClick={handledeleteuser}>
+          Eliminar
+          </button>
       </div>
     </div>
   )

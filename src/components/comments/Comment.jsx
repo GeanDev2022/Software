@@ -119,6 +119,18 @@ export const Comment = () => {
           Swal.fire('Error', 'Error, intente nuevamente', 'error');
         }
         dispatch(isvalidate(false))
+        
+        setComment({
+          comentarioId:0,
+          calificacion: 0,
+          resenaComentario: "",
+          usuario:{
+            personaId: cedula
+          },
+          cita:{
+            citaId: 0
+          }
+        })
       }
 
       const handleUpdate = async() => {
