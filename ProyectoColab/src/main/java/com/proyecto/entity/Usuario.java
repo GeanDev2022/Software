@@ -20,7 +20,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		@NamedStoredProcedureQuery(name = "em.ProcedureListarCitasUsuarios", procedureName = "listarcitasusuarios",
 		parameters = {
 				@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
-		})		
+		}),
+		@NamedStoredProcedureQuery(name = "em.ProcedureListarCitasUsuariosComplete", procedureName = "listarcitasusuarioscomplete",
+		parameters = {
+				@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
+		})	
 })
 
 @Table(name = "Usuario")

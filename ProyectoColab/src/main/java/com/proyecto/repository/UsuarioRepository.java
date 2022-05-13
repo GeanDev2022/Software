@@ -34,5 +34,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	@Procedure(name = "em.ProcedureListarCitasUsuarios") 
 	Map<String, ?> ProcedureListarCitasUsuarios(int person_id);
 	
+	@Procedure(name = "em.ProcedureListarCitasUsuariosComplete") 
+	Map<String, ?> ProcedureListarCitasUsuariosComplete(int person_id);
+	
 
 }

@@ -156,6 +156,13 @@ public class Controller {
 		
 	}
 	
+	@GetMapping("/listarCitasUsuariosComplete/{id}")
+	public Object listarCitasUsuariosComplete(@PathVariable(value = "id")  int personId) {
+
+		return services.listarCitasUsuariosComplete(personId);
+		
+	}
+	
 
 
 	// -----------------------------TipoUsuario---------------------------------------------------
@@ -522,6 +529,13 @@ public class Controller {
 				.collect(Collectors.toList());
 
 		return comentario;
+	}
+	
+	@GetMapping("/listarComentariosPersona/{id}")
+	public Object listarComentariosPersona(@PathVariable(value = "id")  int personId) {
+
+		return services.listarComentariosPersona(personId);
+		
 	}
 
 	// -----------------------------Cita---------------------------------------------------

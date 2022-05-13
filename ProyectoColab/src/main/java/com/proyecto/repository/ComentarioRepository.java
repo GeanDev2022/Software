@@ -1,5 +1,7 @@
 package com.proyecto.repository;
 
+import java.util.Map;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 
@@ -15,5 +17,8 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Integer>
 
 	@Procedure(procedureName = "eliminarcomentario")
 	String ProcedureeliminarComentario(int comentarioId);
+	
+	@Procedure(name = "em.ProcedureListarComentariosPersona") 
+	Map<String, ?> ProcedureListarComentariosPersona(int person_id);
 
 }

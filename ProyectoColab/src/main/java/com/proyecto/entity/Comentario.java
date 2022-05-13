@@ -10,9 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 @Entity
+@NamedStoredProcedureQueries({
+	@NamedStoredProcedureQuery(name = "em.ProcedureListarComentariosPersona", procedureName = "listarcomentariospersona",
+	parameters = {
+			@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
+	})	
+})
+
+
 @Table(name = "Comentario")
 public class Comentario implements Serializable {
 

@@ -115,6 +115,15 @@ public class ServiceAppImpl implements ServiceApp {
 		spq.execute();
 		return spq.getResultList();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarCitasUsuariosComplete(int personId) {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarCitasUsuariosComplete");
+		spq.setParameter("personId", personId);
+		spq.execute();
+		return spq.getResultList();
+	}
 
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
@@ -274,6 +283,15 @@ public class ServiceAppImpl implements ServiceApp {
 
 		return comentarioRepository.ProceduremodificarComentario(comentario.getComentarioId(),
 				comentario.getCalificacion(), comentario.getResenaComentario(), comentario.getUsuario().getPersonaId());
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarComentariosPersona(int personId) {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarComentariosPersona");
+		spq.setParameter("personId", personId);
+		spq.execute();
+		return spq.getResultList();
 	}
 
 	// ---------------------------------------Cita------------------------------------

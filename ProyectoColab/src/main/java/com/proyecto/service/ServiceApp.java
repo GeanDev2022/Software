@@ -37,6 +37,8 @@ public interface ServiceApp {
 
 	public Object listarCitasUsuarios(int personId);
 
+	public Object listarCitasUsuariosComplete(int personId);
+	
 	// TipoUsuario
 	public String saveTipoUsuario(TipoUsuario tipoUsuario);
 
@@ -90,6 +92,8 @@ public interface ServiceApp {
 	public void deleteByIdComentario(int id);
 
 	public String actualizarComentario(Comentario comentario);
+	
+	public Object listarComentariosPersona(int personId);
 
 	// Cita
 	public String saveCita(Cita cita);
