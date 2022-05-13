@@ -3,27 +3,25 @@ import { useDispatch } from 'react-redux';
 import { getItemComments } from '../../actions/commentsAction';
 import { isvalidate } from '../../actions/servicesAction';
 
-export const CommentItem = ({i, comentarioId, calificacion, resenaComentario,usuario, cita }) => {
-
+export const CommentItem = (value) => {
+    console.log(value)
     const dispatch = useDispatch();
     const handleItem = () => {
    
-      dispatch(getItemComments( comentarioId, calificacion, resenaComentario,usuario, cita));
+       dispatch(getItemComments( value[0], value[1], value[3], value[4] , value[2]));
       dispatch(isvalidate(true));
     }
 
   return (
    
-          <tr>
-      <th scope="row">{i}</th>
+      <tr>
+      <th scope="row">{value.i}</th>
       <td>
-        <button className="btn btn-primary" onClick={handleItem}>Seleccionar</button>
+        <button className="btn btn-primary  btn btn--dark" onClick={handleItem}>Seleccionar</button>
       </td>
-      <td>{comentarioId}</td>
-      <td>{calificacion}</td>
-      <td>{resenaComentario}</td>
-      <td>{usuario.nombre_persona}</td>
-      <td>{cita.direccion_cita}</td>
+      <td>{value[3]}</td>
+      <td>{value[4]}</td>
+      <td>{value[2]}</td>
      
     </tr>
   )

@@ -15,7 +15,7 @@ export const ServicesItem = ({ i, nombreServicio, precio, tipoServicio,servicioI
     <tr>
       <th scope="row">{i}</th>
       <td>
-        <button className="btn btn-primary" onClick={handleItem}>Seleccionar</button>
+        <button className="btn btn-primary  btn btn--dark" onClick={handleItem}>Seleccionar</button>
       </td>
       <td>{nombreServicio}</td>
       <td>{precio}</td>

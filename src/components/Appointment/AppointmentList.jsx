@@ -21,7 +21,8 @@ export const AppointmentList = ({data}) => {
       </thead>
       <tbody>
         {data.map((values, i) => (
-          <AppointmentItem key={i} i={i} {...values} />
+
+           <AppointmentItem key={i} i={i} {...values} />
         ))}
       </tbody>
     </table>

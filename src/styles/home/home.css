@@ -19,3 +19,13 @@ display: flex;
 .span-color {
     color: white;
 }
+
+.btn {
+   
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+.btn--dark:focus{
+    color: var(--dark);
+    background-color:var(--white)
+}

@@ -42,7 +42,7 @@ export const Appointment = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(listAppointment())
+      dispatch(listAppointment(cedula))
       dispatch(listService())
       dispatch(listAppointmentUserDoctor())
     }, 1000)

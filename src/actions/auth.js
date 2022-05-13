@@ -30,7 +30,7 @@ export const startRegister = (usuario) => {
     return async (dispatch) => {
         const resp = await fetchBackend('registroUsuario', usuario, 'POST')
         //  const data = await resp.text();
-        console.log(resp.status)
+ 
         if (resp.status === 201) {
 
             Swal.fire('Success', 'Registro exitoso!', 'success');

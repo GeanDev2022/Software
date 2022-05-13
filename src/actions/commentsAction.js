@@ -20,11 +20,13 @@ export const startComments = (comment) => {
     }
 }
 
-export const listComments = () => {
+export const listComments = (id) => {
     return async(dispatch) => {
          try {
-            const resp = await handlelist('listarComentarios')
-            dispatch(CommentsLoad(resp))
+            const resp = await fetchBackend(`listarComentariosPersona/${id}`,{})
+            const data  = await resp.json();
+            console.log(data)
+            dispatch(CommentsLoad(data))
         } catch (error) {
             console.error(error)
         }
@@ -41,11 +43,11 @@ export const isComments = ({calificacion, resenaComentario,usuario, cita})=>
 } )
 
 
-export const getItemComments = (comentarioId, calificacion, resenaComentario,usuario, cita)=>
+export const getItemComments = (comentarioId, citaid, calificacion, resenaComentario, cita)=>
 ({
     type: types.itemComment,
     payload: {
-        comentarioId, calificacion, resenaComentario,usuario, cita
+        comentarioId, calificacion, resenaComentario, cita, citaid
     }
 })
 

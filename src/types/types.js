@@ -15,6 +15,7 @@ export const types = {
     visibleValidate: '[Visible] visible validate',
     commentload: '[Comment] load comments',
     itemComment: '[Comment] get comment',
-    comment: '[Comment] create Comment'
+    comment: '[Comment] create Comment',
+    userTop: '[userTopLoad] load userTop',
 }
 

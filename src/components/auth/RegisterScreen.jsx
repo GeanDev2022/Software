@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
 import { startRegister } from '../../actions/auth'
 import { useForm } from '../../hooks/useForm'
 
@@ -17,6 +18,12 @@ export const RegisterScreen = () => {
     tipoUsuario: 1,
     contrasenaUsuario: '123456',
   })
+  const [validate, handleOnChangeValidate] = useForm({
+
+    contrasenaUsuario2: '1234567'
+  })
+  const {contrasenaUsuario2} = validate; 
+
 
   const {
     cedulaPersona,
@@ -25,13 +32,20 @@ export const RegisterScreen = () => {
     direccionPersona,
     emailUsuario,
     tipoUsuario,
-    contrasenaUsuario,
+    contrasenaUsuario
   } = user
 
 
   const handleRegister = (e) => {
     e.preventDefault()
-    dispatch(startRegister(user));
+    if(contrasenaUsuario === contrasenaUsuario2)
+    {
+     dispatch(startRegister(user));
+    }
+    else{
+      Swal.fire("Error", "error, la contraseñas no coinciden", "error");
+    }
+
   }
 
 
@@ -101,7 +115,7 @@ export const RegisterScreen = () => {
             autoComplete="off"
           />
           <br />
-          <input
+          {/* <input
             className="form-control"
             type="number"
             name="tipoUsuario"
@@ -109,7 +123,18 @@ export const RegisterScreen = () => {
             onChange={handleOnChange}
             value={tipoUsuario}
             autoComplete="off"
-          />
+          /> */}
+
+          <select
+            className="form-select"
+            onChange={handleOnChange}
+            value={tipoUsuario}
+            name="tipoUsuario"
+          >
+            <option value="1">Administrador</option>
+            <option value="2">Medico</option>
+            <option value="3">Paciente</option>
+          </select>
           <br />
           {/* <input
             className="form-control"
@@ -128,6 +153,17 @@ export const RegisterScreen = () => {
             placeholder="Password"
             onChange={handleOnChange}
             value={contrasenaUsuario}
+            autoComplete="off"
+          />
+          <br />
+
+          <input
+            className="form-control"
+            type="password"
+            name="contrasenaUsuario2"
+            placeholder="Confirmar Password"
+            onChange={handleOnChangeValidate}
+            value={contrasenaUsuario2}
             autoComplete="off"
           />
           <br />

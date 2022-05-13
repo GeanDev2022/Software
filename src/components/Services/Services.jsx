@@ -10,6 +10,7 @@ import {
 import { fetchBackend } from '../../helpers/fetch'
 import { useForm } from '../../hooks/useForm'
 import { ServicesList } from './ServicesList'
+import { servicios } from '../../helpers/dataService' 
 
 export const Services = () => {
   const dispatch = useDispatch()
@@ -26,7 +27,7 @@ export const Services = () => {
   const [listnew, , setlistnew] = useForm({
     value: true,
   })
-
+  
   useEffect(() => {
     setTimeout(() => {
       dispatch(listService())
@@ -105,7 +106,7 @@ export const Services = () => {
               autoComplete="off"
             />
           )}
-          <input
+          {/* <input
             className="form-control"
             type="text"
             name="nombreServicio"
@@ -113,7 +114,25 @@ export const Services = () => {
             onChange={handleOnChange}
             value={nombreServicio}
             autoComplete="off"
-          />
+          /> */}
+
+          <br />
+          <select
+            className="form-select"
+            onChange={handleOnChange}
+            value={nombreServicio}
+            name="nombreServicio"
+          >
+           
+          { 
+           servicios.map(({nombre}, i)=>
+           {
+           
+           return   <option key ={i} value={nombre}>{nombre}</option>
+          })
+            }
+          </select>
+          
           <br />
 
           <input

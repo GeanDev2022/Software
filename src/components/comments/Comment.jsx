@@ -39,7 +39,7 @@ export const Comment = () => {
   
     useEffect(() => {
       setTimeout(() => {
-        dispatch(listComments())
+        dispatch(listComments(cedula))
         //dispatch(listAppointment())
         dispatch(listAppointmentUser(cedula))
       }, 2000)
@@ -47,11 +47,9 @@ export const Comment = () => {
   
     useEffect(() => {
       if (!!itemComment) {
-        const { comentarioId, calificacion, resenaComentario, usuario, cita} = itemComment
-        const {personaId} = usuario
-        const {citaId} = cita
+        const { comentarioId, calificacion, resenaComentario, citaid} = itemComment
         statecita({
-          codigoCita:citaId
+          codigoCita:citaid
         })
         setComment({
           comentarioId,
@@ -75,7 +73,13 @@ export const Comment = () => {
       e.preventDefault()
 
       comment.cita.citaId = codigoCita
+      if(comment.calificacion >=1 && comment.calificacion <=5 )
+      {
       dispatch(startComments(comment))
+      }
+      else{
+          Swal.fire('Warning','La calificacion debe ser entre 1 y 5 ', 'warning')
+      }
       setlistnew({
         listnew: true,
       })

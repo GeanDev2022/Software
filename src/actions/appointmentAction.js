@@ -21,11 +21,12 @@ export const startAppointment = (appointment) => {
     }
 }
 
-export const listAppointment = () => {
+export const listAppointment = (id) => {
     return async(dispatch) => {
          try {
-            const resp = await handlelist('listarCita')
-            dispatch(appointmentLoad(resp))
+            const resp = await fetchBackend(`listarCitasUsuariosComplete/${id}`,{})
+            const data = await resp.json();
+            dispatch(appointmentLoad(data))
         } catch (error) {
             console.error(error)
         }
