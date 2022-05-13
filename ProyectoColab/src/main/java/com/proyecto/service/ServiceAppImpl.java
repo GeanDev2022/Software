@@ -93,11 +93,6 @@ public class ServiceAppImpl implements ServiceApp {
 				usuario.getEmailUsuario(), usuario.getTipoUsuario());
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public String listarDoctorTopCalificado() {
-		return usuarioRepository.ProcedureListarDoctorTopCalificado();
-	}
 
 	@Override
 	@Transactional(readOnly = true)

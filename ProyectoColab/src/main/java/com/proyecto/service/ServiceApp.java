@@ -31,8 +31,6 @@ public interface ServiceApp {
 
 	public String actualizarUsuario(Usuario usuario);
 
-	public String listarDoctorTopCalificado();
-
 	public Object listarDoctores();
 
 	public Object listarCitasUsuarios(int personId);

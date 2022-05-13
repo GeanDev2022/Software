@@ -25,9 +25,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	@Procedure(procedureName = "buscarusuario")
 	String ProcedureBuscarUsuario(int cedulapersona);
 
-	@Procedure(procedureName = "doctortopcalificado")
-	String ProcedureListarDoctorTopCalificado();
-
 	@Procedure(name = "em.ProcedureListarDoctores") 
 	Map<String, ?> ProcedureListarDoctores();
 	

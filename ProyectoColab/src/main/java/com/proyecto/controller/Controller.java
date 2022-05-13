@@ -134,14 +134,6 @@ public class Controller {
 		return usuarios;
 	}
 	
-	@GetMapping("/listarDocTop")
-	public String listarDocTop() {
-
-		String doctor = services.listarDoctorTopCalificado();
-
-		return doctor;
-	}
-	
 	@GetMapping("/listarDoctores")
 	public Object listarDoctores() {
 
