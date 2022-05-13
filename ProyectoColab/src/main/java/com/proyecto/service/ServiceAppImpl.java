@@ -124,6 +124,14 @@ public class ServiceAppImpl implements ServiceApp {
 		spq.execute();
 		return spq.getResultList();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarTopFiveDoc() {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarTopFiveDoc");
+		spq.execute();
+		return spq.getResultList();
+	}
 
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override

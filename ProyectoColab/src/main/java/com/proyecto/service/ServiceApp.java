@@ -39,6 +39,8 @@ public interface ServiceApp {
 
 	public Object listarCitasUsuariosComplete(int personId);
 	
+	public Object listarTopFiveDoc();
+	
 	// TipoUsuario
 	public String saveTipoUsuario(TipoUsuario tipoUsuario);
 

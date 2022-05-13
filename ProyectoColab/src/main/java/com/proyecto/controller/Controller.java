@@ -163,6 +163,12 @@ public class Controller {
 		
 	}
 	
+	@GetMapping("/listarTopFiveDoc")
+	public Object listarTopFiveDoc() {
+
+		return services.listarTopFiveDoc();
+		
+	}
 
 
 	// -----------------------------TipoUsuario---------------------------------------------------
