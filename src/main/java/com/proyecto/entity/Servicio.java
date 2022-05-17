@@ -2,20 +2,12 @@ package com.proyecto.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Servicio")
@@ -35,11 +27,6 @@ public class Servicio implements Serializable {
 
 	@Column(name = "tipoServicio")
 	private int tipoServicio;
-
-	
-	@OneToOne(mappedBy = "servicio")
-	@JsonIgnore
-	private Cita cita;
 
 	public int getServicioId() {
 		return ServicioId;
@@ -73,14 +60,6 @@ public class Servicio implements Serializable {
 		this.tipoServicio = tipoServicio;
 	}
 
-	public Cita getCita() {
-		return cita;
-	}
-
-	public void setCita(Cita cita) {
-		this.cita = cita;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(ServicioId);
@@ -97,7 +76,5 @@ public class Servicio implements Serializable {
 		Servicio other = (Servicio) obj;
 		return ServicioId == other.ServicioId;
 	}
-
-	
 
 }

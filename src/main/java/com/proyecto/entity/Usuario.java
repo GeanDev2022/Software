@@ -5,14 +5,28 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@NamedStoredProcedureQueries({
+		@NamedStoredProcedureQuery(name = "em.ProcedureListarTopFiveDoc", procedureName = "topfivedoctorescalificados"),
+		@NamedStoredProcedureQuery(name = "em.ProcedureListarCitasUsuarios", procedureName = "listarcitasusuarioscomplete",
+		parameters = {
+				@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
+		}),
+		@NamedStoredProcedureQuery(name = "em.ProcedureListarCitasUsuariosComplete", procedureName = "listarcitasusuarioscomplete",
+		parameters = {
+				@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
+		})	
+})
+
 @Table(name = "Usuario")
 public class Usuario extends Persona implements Serializable {
 
@@ -23,10 +37,9 @@ public class Usuario extends Persona implements Serializable {
 
 	@Column(name = "contrasenaUsuario", length = 300, nullable = false)
 	private String contrasenaUsuario;
-
-	@ManyToOne
-	@JoinColumn(name = "tipoUsuarioId")
-	private TipoUsuario tipoUsuario;
+	
+	@Column(name = "tipoUsuario")
+	private int tipoUsuario;
 
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
@@ -35,6 +48,10 @@ public class Usuario extends Persona implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private List<Cita> cita;
+	
+	@OneToMany(mappedBy = "doctor")
+	@JsonIgnore
+	private List<Cita> citaDoctor;
 
 	public String getEmailUsuario() {
 		return emailUsuario;
@@ -52,11 +69,11 @@ public class Usuario extends Persona implements Serializable {
 		this.contrasenaUsuario = contrasenaUsuario;
 	}
 
-	public TipoUsuario getTipoUsuario() {
+	public int getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 

@@ -25,7 +25,6 @@ import com.proyecto.entity.Servicio;
 import com.proyecto.entity.TipoServicio;
 import com.proyecto.entity.TipoUsuario;
 import com.proyecto.entity.Usuario;
-import com.proyecto.helper.autenticacion;
 import com.proyecto.service.ServiceApp;
 
 @RestController
@@ -45,37 +44,27 @@ public class Controller {
 	 * @return
 	 */
 	@PostMapping("/registroUsuario")
-	public boolean registroUsuario(@RequestBody Usuario usuario) {
-		boolean validar = false;
+	public ResponseEntity<?> registroUsuario(@RequestBody Usuario usuario) {
+
 		if (usuario.getCedulaPersona() != 0 && !services.findByIdUsuario(usuario.getCedulaPersona()).isPresent()) {
-			if (services.saveUsuario(usuario) != null) {
-				validar = true;
-				return validar;
-			}
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveUsuario(usuario));
 
 		}
-		return validar;
-	}
+		return ResponseEntity.notFound().build();
 
-	@PostMapping("/autenticarUsuario")
-	public String autenticarUsuario(@RequestBody autenticacion autenticar) {
-
-		return services.Autenticarusuario(autenticar.getEmailUsuario(), autenticar.getContrasenaUsuario());
 	}
 
 	/**
-	 * @PostMapping("/autenticarUsuario") public List<Object>
-	 * autenticarUsuario(@RequestBody Usuario usuario) {
 	 * 
-	 * return services.autenticarUsuario(usuario.getEmailUsuario(),
-	 * usuario.getContrasenaUsuario()); }
-	 **/
-	/**
-	 * Sirve para eliminar un usuario
-	 * 
-	 * @param userId
+	 * @param usuario
 	 * @return
 	 */
+	@PostMapping("/autenticarUsuario")
+	public String autenticarUsuario(@RequestBody Usuario usuario) {
+
+		return services.Autenticarusuario(usuario.getEmailUsuario(), usuario.getContrasenaUsuario());
+	}
+
 	@DeleteMapping("/borrarUsuario/{id}")
 	public ResponseEntity<?> borrarUsuario(@PathVariable(value = "id") int usuarioId) {
 
@@ -97,24 +86,22 @@ public class Controller {
 	@PutMapping("/actualizarUsuario/{id}")
 	public ResponseEntity<?> updateUser(@RequestBody Usuario detalleUsuario,
 			@PathVariable(value = "id") int usuarioId) {
+		Usuario usuario = new Usuario();
+		String resp = services.buscarUsuario(usuarioId);
+		if (resp.length() > 1) {
+			usuario.setCedulaPersona(detalleUsuario.getCedulaPersona());
+			usuario.setNombrePersona(detalleUsuario.getNombrePersona());
+			usuario.setEdadPersona(detalleUsuario.getEdadPersona());
+			usuario.setDireccionPersona(detalleUsuario.getDireccionPersona());
+			usuario.setCelularPersona(detalleUsuario.getCelularPersona());
+			usuario.setEmailUsuario(detalleUsuario.getEmailUsuario());
+			usuario.setContrasenaUsuario(detalleUsuario.getContrasenaUsuario());
+			usuario.setTipoUsuario(detalleUsuario.getTipoUsuario());
 
-		Optional<Usuario> usuario = services.findByIdUsuario(usuarioId);
-
-		if (!services.findByIdUsuario(usuarioId).isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarUsuario(usuario));
+		} else {
 			return ResponseEntity.notFound().build();
 		}
-
-		usuario.get().setPersonaId(detalleUsuario.getPersonaId());
-		usuario.get().setCedulaPersona(detalleUsuario.getCedulaPersona());
-		usuario.get().setNombrePersona(detalleUsuario.getNombrePersona());
-		usuario.get().setEdadPersona(detalleUsuario.getEdadPersona());
-		usuario.get().setDireccionPersona(detalleUsuario.getDireccionPersona());
-		usuario.get().setCelularPersona(detalleUsuario.getCelularPersona());
-		usuario.get().setEmailUsuario(detalleUsuario.getEmailUsuario());
-		usuario.get().setContrasenaUsuario(detalleUsuario.getContrasenaUsuario());
-
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveUsuario(usuario.get()));
-
 	}
 
 	/**
@@ -125,14 +112,12 @@ public class Controller {
 	 */
 	@GetMapping("/leerUsuario/{id}")
 	public ResponseEntity<?> leerUsuario(@PathVariable(value = "id") int usuarioId) {
-
-		Optional<Usuario> usuario = services.findByIdUsuario(usuarioId);
-		if (!usuario.isPresent()) {
+		String resp = services.buscarUsuario(usuarioId);
+		if (resp.length() > 1) {
+			return ResponseEntity.ok(resp);
+		} else {
 			return ResponseEntity.notFound().build();
 		}
-
-		return ResponseEntity.ok(usuario);
-
 	}
 
 	/**
@@ -148,9 +133,37 @@ public class Controller {
 
 		return usuarios;
 	}
+	
+	@GetMapping("/listarDoctores")
+	public Object listarDoctores() {
 
-	// -----------------------------//
-	// TipoUsuario---------------------------------------------------
+		return services.listarDoctores();
+		
+	}
+	
+	@GetMapping("/listarCitasUsuarios/{id}")
+	public Object listarCitasUsuarios(@PathVariable(value = "id")  int personId) {
+
+		return services.listarCitasUsuarios(personId);
+		
+	}
+	
+	@GetMapping("/listarCitasUsuariosComplete/{id}")
+	public Object listarCitasUsuariosComplete(@PathVariable(value = "id")  int personId) {
+
+		return services.listarCitasUsuariosComplete(personId);
+		
+	}
+	
+	@GetMapping("/listarTopFiveDoc")
+	public Object listarTopFiveDoc() {
+
+		return services.listarTopFiveDoc();
+		
+	}
+
+
+	// -----------------------------TipoUsuario---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear un tipo de usuario
 	 * 
@@ -159,8 +172,15 @@ public class Controller {
 	 */
 	@PostMapping("/registroTipoUsuario")
 	public ResponseEntity<?> registroTipoUsuario(@RequestBody TipoUsuario tipoUsuario) {
+		if (tipoUsuario.getTipoUsuarioId() != 0
+				&& !services.findByIdTipoUsuario(tipoUsuario.getTipoUsuarioId()).isPresent()) {
+			if (services.saveTipoUsuario(tipoUsuario) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoUsuario(tipoUsuario));
+			}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoUsuario(tipoUsuario));
+		}
+		return ResponseEntity.notFound().build();
+
 	}
 
 	/**
@@ -236,8 +256,7 @@ public class Controller {
 		return tipoUsuario;
 	}
 
-	// -----------------------------//
-	// TipoServicio---------------------------------------------------
+	// -----------------------------TipoServicio---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear un tipo de usuario
 	 * 
@@ -246,8 +265,15 @@ public class Controller {
 	 */
 	@PostMapping("/registroTipoServicio")
 	public ResponseEntity<?> registroTipoServicio(@RequestBody TipoServicio tipoServicio) {
+		if (tipoServicio.getTipoServicioId() != 0
+				&& !services.findByIdTipoServicio(tipoServicio.getTipoServicioId()).isPresent()) {
+			if (services.saveTipoServicio(tipoServicio) != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoServicio(tipoServicio));
+			}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveTipoServicio(tipoServicio));
+		}
+		return ResponseEntity.notFound().build();
+
 	}
 
 	/**
@@ -323,8 +349,7 @@ public class Controller {
 		return tipoServicio;
 	}
 
-	// -----------------------------//
-	// Servicio---------------------------------------------------
+	// -----------------------------Servicio---------------------------------------------------
 
 	/**
 	 * Sirve para registrar/crear un Servicio
@@ -332,13 +357,10 @@ public class Controller {
 	 * @param servicio
 	 * @return
 	 */
-	/**
-	 * @PostMapping("/registroServicio") public ResponseEntity<?>
-	 * registroServicio(@RequestBody Servicio servicio) { int idaleatorio = (int)
-	 * (1000+Math.random()*7000000); servicio.setServicioId(idaleatorio); return
-	 * ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
-	 * }
-	 **/
+	@PostMapping("/registroServicio")
+	public ResponseEntity<?> registroServicio(@RequestBody Servicio servicio) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio));
+	}
 
 	/**
 	 * Sirve para eliminar un Servicio
@@ -354,7 +376,7 @@ public class Controller {
 		}
 
 		services.deleteByIdServicio(servicioId);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.status(200).build();
 	}
 
 	/**
@@ -364,26 +386,24 @@ public class Controller {
 	 * @param servicioId
 	 * @return
 	 */
-	/**
-	 * @PutMapping("/actualizarServicio/{id}") public ResponseEntity<?>
-	 * actualizarServicio(@RequestBody Servicio detallesServicio,
-	 * 
-	 * @PathVariable(value = "id") int servicioId) {
-	 * 
-	 *                     Optional<Servicio> servicio =
-	 *                     services.findByIdServicio(servicioId);
-	 * 
-	 *                     if (!services.findByIdServicio(servicioId).isPresent()) {
-	 *                     return ResponseEntity.notFound().build(); }
-	 * 
-	 *                     servicio.get().setServicioId(detallesServicio.getServicioId());
-	 *                     servicio.get().setNombreServicio(detallesServicio.getNombreServicio());
-	 * 
-	 *                     return
-	 *                     ResponseEntity.status(HttpStatus.CREATED).body(services.saveServicio(servicio.get()));
-	 * 
-	 *                     }
-	 **/
+
+	@PutMapping("/actualizarServicio/{id}")
+	public ResponseEntity<?> actualizarServicio(@RequestBody Servicio detallesServicio,
+			@PathVariable(value = "id") int servicioId) {
+
+		Servicio servicio = new Servicio();
+		String resp = services.buscarServicio(servicioId);
+		if (resp.length() > 1) {
+			servicio.setNombreServicio(detallesServicio.getNombreServicio());
+			servicio.setPrecio(detallesServicio.getPrecio());
+			servicio.setTipoServicio(detallesServicio.getTipoServicio());
+			servicio.setServicioId(detallesServicio.getServicioId());
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarServicio(servicio));
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 	/**
 	 * Sirve para Leer un Servicio
@@ -417,8 +437,7 @@ public class Controller {
 		return servicio;
 	}
 
-	// -----------------------------//
-	// Comentario---------------------------------------------------
+	// -----------------------------Comentario---------------------------------------------------
 	/**
 	 * Sirve para registrar/crear un Comentario
 	 * 
@@ -428,7 +447,12 @@ public class Controller {
 	@PostMapping("/registroComentario")
 	public ResponseEntity<?> registroComentario(@RequestBody Comentario comentario) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
+		if (!services.findByIdComentario(comentario.getComentarioId()).isPresent()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario));
+
+		}
+		return ResponseEntity.notFound().build();
+
 	}
 
 	/**
@@ -469,7 +493,7 @@ public class Controller {
 		comentario.get().setResenaComentario(detallesComentario.getResenaComentario());
 		comentario.get().setCalificacion(detallesComentario.getCalificacion());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveComentario(comentario.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarComentario(comentario.get()));
 
 	}
 
@@ -504,9 +528,16 @@ public class Controller {
 
 		return comentario;
 	}
+	
+	@GetMapping("/listarComentariosPersona/{id}")
+	public Object listarComentariosPersona(@PathVariable(value = "id")  int personId) {
 
-	// -----------------------------//
-	// Cita---------------------------------------------------
+		return services.listarComentariosPersona(personId);
+		
+	}
+
+	// -----------------------------Cita---------------------------------------------------
+
 	/**
 	 * Sirve para registrar/crear una Cita
 	 * 
@@ -515,8 +546,14 @@ public class Controller {
 	 */
 	@PostMapping("/registroCita")
 	public ResponseEntity<?> registroCita(@RequestBody Cita cita) {
+		if (!services.findByIdCita(cita.getCitaId()).isPresent()) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
+			if (cita.getServicio().getServicioId() == 0) {
+				cita.getServicio().setServicioId(1);
+			}
+			return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	/**
@@ -553,13 +590,39 @@ public class Controller {
 		}
 
 		cita.get().setCitaId(detallesCita.getCitaId());
-		cita.get().setFechaCita(detallesCita.getFechaCita());
 		cita.get().setDireccionCita(detallesCita.getDireccionCita());
+		cita.get().setFechaCita(detallesCita.getFechaCita());
+		cita.get().setServicio(detallesCita.getServicio());
+		cita.get().setUsuario(detallesCita.getUsuario());
+		cita.get().setDoctor(detallesCita.getDoctor());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(services.saveCita(cita.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(services.updateCita(cita.get()));
 
 	}
 
+	/**
+	 * Sirve para actualizar una fecha de una Cita
+	 * 
+	 * @param detallesCita
+	 * @param citaId
+	 * @return
+	 */
+	/**
+	 * @PutMapping("/actualizarFechaCita/{id}") public ResponseEntity<?>
+	 * actualizarFechaCita(@RequestBody Cita detallesCita, @PathVariable(value =
+	 * "id") int citaId) {
+	 * 
+	 * Optional<Cita> cita = services.findByIdCita(citaId);
+	 * 
+	 * if (!services.findByIdCita(citaId).isPresent()) { return
+	 * ResponseEntity.notFound().build(); }
+	 * cita.get().setFechaCita(detallesCita.getFechaCita());
+	 * 
+	 * return
+	 * ResponseEntity.status(HttpStatus.CREATED).body(services.actualizarFechaCita(cita.get()));
+	 * 
+	 * }
+	 **/
 	/**
 	 * Sirve para Leer un cita
 	 * 

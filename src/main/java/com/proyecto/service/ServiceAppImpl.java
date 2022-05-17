@@ -1,17 +1,13 @@
 package com.proyecto.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
 import javax.persistence.*;
-
+import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.proyecto.entity.Cita;
 import com.proyecto.entity.Comentario;
 import com.proyecto.entity.Servicio;
@@ -41,18 +37,17 @@ public class ServiceAppImpl implements ServiceApp {
 	@Autowired
 	private CitaRepository citaRepository;
 
-	private final EntityManager entityManager;
-
-	@Autowired
-	public ServiceAppImpl(final EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
+	@PersistenceContext
+	EntityManager em;
 
 	// ---------------------------------------USER------------------------------------
+
 	@Override
 	@Transactional
-	public Usuario saveUsuario(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+	public String saveUsuario(Usuario usuario) {
+		return usuarioRepository.ProcedureinsertarUsuario(usuario.getCedulaPersona(), usuario.getCelularPersona(),
+				usuario.getDireccionPersona(), usuario.getEdadPersona(), usuario.getNombrePersona(),
+				usuario.getContrasenaUsuario(), usuario.getEmailUsuario(), usuario.getTipoUsuario());
 	}
 
 	@Override
@@ -69,57 +64,74 @@ public class ServiceAppImpl implements ServiceApp {
 
 	@Override
 	@Transactional(readOnly = true)
+	public String buscarUsuario(int id) {
+		return usuarioRepository.ProcedureBuscarUsuario(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Optional<Usuario> findByIdUsuario(int id) {
 		return usuarioRepository.findById(id);
 	}
-	
+
 	@Override
 	@Transactional
 	public void deleteByIdUsuario(int id) {
 		usuarioRepository.deleteById(id);
 	}
 
-	public String Autenticarusuario(String email, String contrasena){
+	public String Autenticarusuario(String email, String contrasena) {
 		return usuarioRepository.Procedureautenticarusuario(email, contrasena);
-		
-		
 	}
-/**
+
 	@Override
-	public List<Object> autenticarUsuario(String email, String password) {
+	@Transactional
+	public String actualizarUsuario(Usuario usuario) {
 
-		int numero = 0;
-		List<Object> lista = new ArrayList<Object>();
-		try {
-
-			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("autenticarUsuario");
-
-			// Registrar los parámetros de entrada y salida
-			storedProcedureQuery.registerStoredProcedureParameter("parametro1", String.class, ParameterMode.IN);
-			storedProcedureQuery.registerStoredProcedureParameter("parametro2", String.class, ParameterMode.IN);
-
-			// Configuramos el valor de entrada
-			storedProcedureQuery.setParameter("parametro1", email);
-			storedProcedureQuery.setParameter("parametro2", password);
-
-			// Realizamos la llamada al procedimiento
-			storedProcedureQuery.execute();
-
-			lista = storedProcedureQuery.getResultList();
-
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-			numero = -1;
-		}
-		return lista;
+		return usuarioRepository.ProceduremodificarUsuario(usuario.getCedulaPersona(), usuario.getCelularPersona(),
+				usuario.getDireccionPersona(), usuario.getNombrePersona(), usuario.getContrasenaUsuario(),
+				usuario.getEmailUsuario(), usuario.getTipoUsuario());
 	}
-**/	
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarDoctores() {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarDoctores");
+		spq.execute();
+		return spq.getResultList();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarCitasUsuarios(int personId) {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarCitasUsuarios");
+		spq.setParameter("personId", personId);
+		spq.execute();
+		return spq.getResultList();
+	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarCitasUsuariosComplete(int personId) {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarCitasUsuariosComplete");
+		spq.setParameter("personId", personId);
+		spq.execute();
+		return spq.getResultList();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarTopFiveDoc() {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarTopFiveDoc");
+		spq.execute();
+		return spq.getResultList();
+	}
+
 	// ---------------------------------------TipoUsuario------------------------------------
 	@Override
-	public TipoUsuario saveTipoUsuario(TipoUsuario tipoUsuario) {
-		return tipoUsuarioRepository.save(tipoUsuario);
+	public String saveTipoUsuario(TipoUsuario tipoUsuario) {
+		return tipoUsuarioRepository.ProcedureinsertarTipoUsuario(tipoUsuario.getNombreTipoUsuario());
 	}
 
 	@Override
@@ -144,11 +156,19 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdTipoUsuario(int id) {
 		tipoUsuarioRepository.deleteById(id);
 	}
-	
+
+	@Override
+	@Transactional
+	public String actualizarTipoUsuario(TipoUsuario tipoUsuario) {
+
+		return tipoUsuarioRepository.ProceduremodificarTipoUsuario(tipoUsuario.getTipoUsuarioId(),
+				tipoUsuario.getNombreTipoUsuario());
+	}
+
 	// ---------------------------------------TipoServicio------------------------------------
 	@Override
-	public TipoServicio saveTipoServicio(TipoServicio tipoServicio) {
-		return tipoServicioRepository.save(tipoServicio);
+	public String saveTipoServicio(TipoServicio tipoServicio) {
+		return tipoServicioRepository.ProcedureinsertarTipoServicio(tipoServicio.getNombreTipoServicio());
 	}
 
 	@Override
@@ -173,40 +193,30 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdTipoServicio(int id) {
 		tipoServicioRepository.deleteById(id);
 	}
-	
+
+	@Override
+	@Transactional
+	public String actualizarTipoServicio(TipoServicio tipoServicio) {
+
+		return tipoServicioRepository.ProceduremodificarTipoServicio(tipoServicio.getTipoServicioId(),
+				tipoServicio.getNombreTipoServicio());
+	}
+
 	// ---------------------------------------Servicio------------------------------------
 
 	@Override
 	@Transactional
-	public boolean saveServicio(Servicio servicio) {
-		boolean validar = false;
-		List<Object> lista = new ArrayList<Object>();
-		try {
+	public String saveServicio(Servicio servicio) {
 
-			StoredProcedureQuery storedProcedureQuery = entityManager
-					.createStoredProcedureQuery("SafeLife.serviceInProc");
-
-			// Registrar los parámetros de entrada y salida
-			storedProcedureQuery.registerStoredProcedureParameter("nombreServicio", String.class, ParameterMode.IN);
-			storedProcedureQuery.registerStoredProcedureParameter("precio", int.class, ParameterMode.IN);
-			storedProcedureQuery.registerStoredProcedureParameter("tipoServicio", int.class, ParameterMode.IN);
-
-			// Configuramos el valor de entrada
-			storedProcedureQuery.setParameter("nombreServicio", servicio.getNombreServicio());
-			storedProcedureQuery.setParameter("precio", servicio.getPrecio());
-			storedProcedureQuery.setParameter("tipoServicio", servicio.getTipoServicio());
-
-			// Realizamos la llamada al procedimiento
-			storedProcedureQuery.execute();
-
-			//lista = storedProcedureQuery.getResultList();
-
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-		}
-		return validar;
+		return servicioRepository.ProcedureinsertarServicio(servicio.getNombreServicio(), servicio.getPrecio(),
+				servicio.getTipoServicio());
 	}
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public String buscarServicio(int id) {
+		return servicioRepository.ProcedureBuscarServicio(id);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -230,11 +240,21 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdServicio(int id) {
 		servicioRepository.deleteById(id);
 	}
-	
+
+	@Override
+	@Transactional
+	public String actualizarServicio(Servicio servicio) {
+
+		return servicioRepository.ProceduremodificarServicio(servicio.getServicioId(), servicio.getNombreServicio(),
+				servicio.getPrecio(), servicio.getTipoServicio());
+	}
+
 	// ---------------------------------------Comentario------------------------------------
 	@Override
-	public Comentario saveComentario(Comentario comentario) {
-		return comentarioRepository.save(comentario);
+	public String saveComentario(Comentario comentario) {
+		return comentarioRepository.ProcedureinsertarComentario(comentario.getCalificacion(),
+				comentario.getResenaComentario(), comentario.getUsuario().getPersonaId(),
+				comentario.getCita().getCitaId());
 	}
 
 	@Override
@@ -259,11 +279,35 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdComentario(int id) {
 		comentarioRepository.deleteById(id);
 	}
+
+	@Override
+	@Transactional
+	public String actualizarComentario(Comentario comentario) {
+
+		return comentarioRepository.ProceduremodificarComentario(comentario.getComentarioId(),
+				comentario.getCalificacion(), comentario.getResenaComentario(), comentario.getUsuario().getPersonaId());
+	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public Object listarComentariosPersona(int personId) {
+		StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("em.ProcedureListarComentariosPersona");
+		spq.setParameter("personId", personId);
+		spq.execute();
+		return spq.getResultList();
+	}
+
 	// ---------------------------------------Cita------------------------------------
 	@Override
-	public Cita saveCita(Cita cita) {
-		return citaRepository.save(cita);
+	public String saveCita(Cita cita) {
+		return citaRepository.ProcedureinsertarCita(cita.getDireccionCita(), cita.getFechaCita(),
+				cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId(), cita.getDoctor());
+	}
+
+	@Override
+	public String updateCita(Cita cita) {
+		return citaRepository.ProceduremodificarCita(cita.getCitaId(), cita.getDireccionCita(), cita.getFechaCita(),
+				cita.getServicio().getServicioId(), cita.getUsuario().getPersonaId(), cita.getDoctor());
 	}
 
 	@Override
@@ -288,5 +332,20 @@ public class ServiceAppImpl implements ServiceApp {
 	public void deleteByIdCita(int id) {
 		citaRepository.deleteById(id);
 	}
+
+	@Override
+	@Transactional
+	public String actualizarFechaCita(Cita cita) {
+
+		return citaRepository.ProceduremodificarFechaCita(cita.getCitaId(), cita.getFechaCita());
+	}
+	/**
+	 * @Override
+	 * @Transactional public String actualizarCita(Cita cita) {
+	 * 
+	 *                return citaRepository.ProceduremodificarCita(cita.getCitaId(),
+	 *                cita.getDireccionCita(), cita.getFechaCita(),
+	 *                cita.getServicio(), cita.getUsuario()); }
+	 **/
 
 }

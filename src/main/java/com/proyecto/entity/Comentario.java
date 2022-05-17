@@ -10,9 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 @Entity
+@NamedStoredProcedureQueries({
+	@NamedStoredProcedureQuery(name = "em.ProcedureListarComentariosPersona", procedureName = "listarcomentariospersona",
+	parameters = {
+			@StoredProcedureParameter(mode = ParameterMode.IN, name="personId", type = Integer.class)
+	})	
+})
+
+
 @Table(name = "Comentario")
 public class Comentario implements Serializable {
 
@@ -31,6 +43,10 @@ public class Comentario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "personaId")
 	private Usuario usuario;
+
+	@ManyToOne
+	@JoinColumn(name = "citaId")
+	private Cita cita;
 
 	public int getComentarioId() {
 		return comentarioId;
@@ -64,6 +80,14 @@ public class Comentario implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Cita getCita() {
+		return cita;
+	}
+
+	public void setCita(Cita cita) {
+		this.cita = cita;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(comentarioId);
@@ -81,7 +105,4 @@ public class Comentario implements Serializable {
 		return comentarioId == other.comentarioId;
 	}
 
-	
-	
-	
 }

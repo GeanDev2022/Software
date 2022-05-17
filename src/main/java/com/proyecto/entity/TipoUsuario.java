@@ -1,7 +1,6 @@
 package com.proyecto.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TipoUsuario")
@@ -27,9 +24,7 @@ public class TipoUsuario implements Serializable {
 	@Column(name = "nombreTipoUsuario", length = 200, nullable = false)
 	private String nombreTipoUsuario;
 
-	@OneToMany(mappedBy = "tipoUsuario")
-	@JsonIgnore
-	private List<Usuario> usuario;
+	
 
 	public int getTipoUsuarioId() {
 		return tipoUsuarioId;
@@ -47,13 +42,6 @@ public class TipoUsuario implements Serializable {
 		this.nombreTipoUsuario = nombreTipoUsuario;
 	}
 
-	public List<Usuario> getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
-	}
 
 	@Override
 	public int hashCode() {

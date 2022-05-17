@@ -8,27 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TipoServicio")
-public class TipoServicio implements Serializable{
+public class TipoServicio implements Serializable {
 
 	private static final long serialVersionUID = -8109810167141483451L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int tipoServicioId;
-	
+
 	@Column(name = "nombreTipoServicio", length = 300, nullable = false)
 	private String nombreTipoServicio;
-	
-
 
 	public int getTipoServicioId() {
 		return tipoServicioId;
@@ -46,8 +39,6 @@ public class TipoServicio implements Serializable{
 		this.nombreTipoServicio = nombreTipoServicio;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(tipoServicioId);
@@ -64,7 +55,5 @@ public class TipoServicio implements Serializable{
 		TipoServicio other = (TipoServicio) obj;
 		return tipoServicioId == other.tipoServicioId;
 	}
-
-	
 
 }
