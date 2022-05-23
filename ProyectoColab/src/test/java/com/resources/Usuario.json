@@ -1,0 +1,16 @@
+{
+ "usuario": [
+  {
+   "persona_id": 1,
+   "cedula_persona": 123456789,
+   "celular_persona": 31012345678,
+   "direccion_persona": "calle 1",
+   "edad_persona": 25,
+   "nombre_persona": "pepito perez",
+   "contrasena_usuario": "contraseña",
+   "email_usuario": "pepe@gmail.com",
+   "tipo_usuario": 1
+     }
+ 
+ ]
+}

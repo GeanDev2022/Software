@@ -104,6 +104,14 @@ public class Persona implements Serializable {
 		return personaId == other.personaId;
 	}
 
+	@Override
+	public String toString() {
+		return "Persona [personaId=" + personaId + ", cedulaPersona=" + cedulaPersona + ", nombrePersona="
+				+ nombrePersona + ", edadPersona=" + edadPersona + ", direccionPersona=" + direccionPersona
+				+ ", celularPersona=" + celularPersona + ", getClass()=" + getClass() + ", toString()="
+				+ super.toString() + "]";
+	}
+
 	
 
 }

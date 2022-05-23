@@ -53,6 +53,8 @@ public class Usuario extends Persona implements Serializable {
 	@JsonIgnore
 	private List<Cita> citaDoctor;
 
+	
+
 	public String getEmailUsuario() {
 		return emailUsuario;
 	}
